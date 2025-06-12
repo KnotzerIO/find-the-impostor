@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Find the Impostor",
   description:
-    "Local party game where players guess a secret word while impostors try to blend in.",
+    "A multiplayer word association party game powered by AI. Find the impostors who don’t know the secret word.",
 };
 
 export default function RootLayout({
