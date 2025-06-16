@@ -9,7 +9,9 @@ export default function Home() {
     <div className="bg-charcoal h-dvh max-h-dvh flex flex-col">
       <div className="container mx-auto px-4 flex-1 flex flex-col items-center justify-center text-center w-full max-w-md">
         <h1 className="text-4xl md:text-5xl font-bold bg-white bg-clip-text text-transparent">
-          {t("title")} <span className="text-purple">IMPOSTOR</span>
+          {t("title")}
+          <br />
+          <span className="text-purple">IMPOSTOR</span>
         </h1>
         <div className="relative size-80 mx-auto">
           <Image
