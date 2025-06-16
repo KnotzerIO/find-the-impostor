@@ -21,8 +21,11 @@ export default function Home() {
           />
         </div>
         <p className="text-gray-400 text-lg m-0">{t("slogan")}</p>
-        <Button className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 border-0 mt-4">
-          <Link href="game-setup">{t("startGame")}</Link>
+        <Button
+          asChild
+          className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 border-0 mt-4"
+        >
+          <Link href="/game-setup">{t("startGame")}</Link>
         </Button>
       </div>
 
