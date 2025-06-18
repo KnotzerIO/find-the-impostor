@@ -26,11 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {process.env.NODE_ENV === "production" &&
+        process.env.UMAMI_SCRIPT_URL &&
+        process.env.UMAMI_WEBSITE_ID && (
       <Script
         async
         src={process.env.UMAMI_SCRIPT_URL}
         data-website-id={process.env.UMAMI_WEBSITE_ID}
       />
+        )}
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
