@@ -7,6 +7,15 @@ export interface WordWithHints {
   hints: string[];
 }
 
+/**
+ * Retrieves a random word with associated hints for a given category and language.
+ *
+ * Attempts to return a word with hints from a local cache, generating and caching new words via an API if necessary. Falls back to predefined or default words if no data is available.
+ *
+ * @param category - The category to select a word from
+ * @param language - The language of the word and hints
+ * @returns A randomly selected word with hints relevant to the specified category and language
+ */
 export async function getRandomWordWithHints(
   category: string,
   language: Locale

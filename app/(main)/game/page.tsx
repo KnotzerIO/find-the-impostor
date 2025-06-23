@@ -15,6 +15,11 @@ const phaseComponents = {
   results: ResultsPhase,
 };
 
+/**
+ * Renders the main game interface, displaying the appropriate phase component and providing navigation controls.
+ *
+ * Dynamically selects and renders the current game phase component based on the game state. Includes a back button that either navigates to the home page or resets the game, depending on the current phase.
+ */
 export default function Game() {
   const { gameState, newGame } = useGameStore();
   const router = useRouter();

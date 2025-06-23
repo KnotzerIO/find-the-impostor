@@ -14,6 +14,11 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+/**
+ * Displays the word reveal phase of the game, allowing players to sequentially reveal their assigned words or roles.
+ *
+ * Renders a UI for selecting and revealing player cards, showing either the assigned word or impostor status with optional hints. Progresses through all players and transitions to the discussion phase once all cards have been revealed.
+ */
 export default function WordRevealPhase() {
   const { gameState, nextRevealPlayer, startDiscussion } = useGameStore();
   const t = useTranslations("WordRevealPhase");

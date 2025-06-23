@@ -18,6 +18,13 @@ import { useState } from "react";
 import { IconBox } from "../_components/icon-box";
 import { useTranslations } from "next-intl";
 
+/**
+ * Renders the game setup interface, allowing players to configure game parameters before starting a session.
+ *
+ * Provides controls for selecting the number of players, entering player names, choosing the number of impostors, selecting the game language, toggling hints for impostors, and managing both default and custom categories. Ensures at least one category is selected before enabling the game start. Handles language persistence and manages asynchronous game start with loading state.
+ *
+ * @returns The setup phase React component for configuring and starting a new game session.
+ */
 export default function SetupPhase() {
   const {
     gameState,

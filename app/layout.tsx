@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     "A multiplayer word association party game powered by AI. Find the impostors who don’t know the secret word.",
 };
 
+/**
+ * Root layout component for the application, providing global font styles, dark theme, and internationalization context.
+ *
+ * Wraps all page content with necessary providers and conditionally includes analytics in production environments.
+ *
+ * @param children - The content to be rendered within the layout
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

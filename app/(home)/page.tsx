@@ -3,6 +3,11 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * Renders the home page with a localized title, logo, slogan, and a button linking to the game.
+ *
+ * Displays a styled layout featuring a heading, logo image, slogan, and a call-to-action button that navigates to the game route. The footer shows the current year and author name.
+ */
 export default function Home() {
   const t = useTranslations("Index");
   return (

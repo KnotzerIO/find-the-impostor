@@ -27,6 +27,17 @@ const roundedMap = {
   xl: "rounded-xl",
 };
 
+/**
+ * Renders a styled container with a specified icon, color, size, and border radius.
+ *
+ * @param icon - The icon component to display inside the container.
+ * @param color - The background color of the container ("blue", "purple", "green", or "red").
+ * @param size - The size of the container and icon ("sm", "md", or "lg"). Defaults to "md".
+ * @param rounded - The border radius of the container ("lg" or "xl"). Defaults to "lg".
+ * @param className - Additional CSS classes to apply to the container.
+ *
+ * @returns A React element displaying the icon within a styled box.
+ */
 export function IconBox({
   icon: Icon,
   color = "blue",

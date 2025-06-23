@@ -2,6 +2,15 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a customizable input element with predefined styling and full support for standard input props.
+ *
+ * Combines default Tailwind CSS classes for consistent appearance, accessibility, and state handling with any additional classes provided.
+ *
+ * @param className - Additional CSS classes to apply to the input element
+ * @param type - The input type attribute (e.g., "text", "password")
+ * @returns A styled HTML input element
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

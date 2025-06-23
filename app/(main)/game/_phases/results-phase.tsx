@@ -4,6 +4,11 @@ import { useGameStore } from "@/store/game-store";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+/**
+ * Displays the end-of-game results screen, showing the secret word, the list of impostors, and an option to start a new game.
+ *
+ * Uses the current game state and localized strings to present the results in a styled, centered layout.
+ */
 export function ResultsPhase() {
   const { gameState, newGame } = useGameStore();
   const t = useTranslations("ResultsPhase");

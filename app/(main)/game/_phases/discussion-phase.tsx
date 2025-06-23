@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Play, Eye } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+/**
+ * Displays the discussion phase of the game, randomly selecting a starting player and providing an option to reveal the impostor.
+ *
+ * Renders a full-screen interface with localized prompts, highlights the chosen starting player, and includes a button to end the game and reveal the impostor.
+ */
 export default function DiscussionPhase() {
   const { gameState, endGame } = useGameStore();
   const t = useTranslations("DiscussionPhase");
