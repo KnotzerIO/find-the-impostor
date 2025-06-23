@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
+import ThemeColor from "@/components/theme-color";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#07090a" />
+      </head>
       {process.env.NODE_ENV === "production" &&
         process.env.UMAMI_SCRIPT_URL &&
         process.env.UMAMI_WEBSITE_ID && (
@@ -40,6 +44,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
+        <ThemeColor />
         <NextIntlClientProvider> {children}</NextIntlClientProvider>
       </body>
     </html>

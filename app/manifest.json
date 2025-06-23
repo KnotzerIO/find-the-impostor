@@ -1,8 +1,6 @@
 {
     "name": "Find The Impostor",
     "short_name": "Impostor",
-    "theme_color": "#07090a",
-    "background_color": "#07090a",
     "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
