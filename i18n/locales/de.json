@@ -3,5 +3,56 @@
         "title": "FINDE DEN",
         "slogan": "Reden ist Silber, Täuschen ist Gold",
         "startGame": "Spiel starten"
+    },
+    "SetupPhase": {
+        "gameSetup": "Spiel einrichten",
+        "configureSettings": "Konfiguriere deine Spieleinstellungen.",
+        "players": "Spieler",
+        "numberOfPlayers": "Anzahl Spieler:",
+        "playerNames": "Spielernamen",
+        "player": "Spieler",
+        "gameSettings": "Spieleinstellungen",
+        "language": "Sprache",
+        "showHints": "Zeige Hinweise für Impostor",
+        "categories": "Kategorien",
+        "addCustomCategory": "Eigene Kategorie hinzufügen",
+        "customCategoryPlaceholder": "Eigene Kategorie eingeben...",
+        "selectCategory": "Bitte wähle mindestens eine Kategorie aus",
+        "startGame": "Spiel starten",
+        "startingGame": "Spiel wird gestartet...",
+        "animals": "Tiere",
+        "food": "Essen",
+        "objects": "Gegenstände",
+        "movies": "Filme",
+        "places": "Orte",
+        "professions": "Berufe"
+    },
+    "WordRevealPhase": {
+        "chooseYourCard": "Wähle deine Karte",
+        "selectAnyCard": "Wähle eine Karte aus, um die Rolle des Spielers zu enthüllen",
+        "playersRevealed": "Spieler enthüllt",
+        "of": "von",
+        "tapToReveal": "Tippen zum Aufdecken",
+        "allCardsRevealed": "Alle Karten aufgedeckt",
+        "everyPlayerSeen": "Jeder Spieler hat seine Rolle gesehen",
+        "startDiscussion": "Spiel starten",
+        "player": "Spieler",
+        "readyToReveal": "Bereit zum Aufdecken?",
+        "impostor": "HOCHSTAPLER",
+        "yourHint": "Dein Hinweis:",
+        "yourWordIs": "Dein Wort ist:",
+        "flipCard": "Karte umdrehen",
+        "nextPlayer": "Nächster Spieler"
+    },
+    "DiscussionPhase": {
+        "sayYourWords": "Sagt eure Wörter",
+        "starts": "beginnt",
+        "revealImpostor": "Impostor aufdecken"
+    },
+    "ResultsPhase": {
+        "results": "Ergebnisse",
+        "theWordWas": "Das Wort war",
+        "newGame": "Neues Spiel",
+        "category": "Kategorie"
     }
 }
