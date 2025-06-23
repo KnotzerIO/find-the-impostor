@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useGameStore } from "@/store/game-store";
 import { Locale } from "@/types/game";
-import { Plus, Settings, Tag, User } from "lucide-react";
+import { Plus, Settings, Tag, User, X } from "lucide-react";
 import { useState } from "react";
 import { IconBox } from "../_components/icon-box";
 import { useTranslations } from "next-intl";
@@ -29,6 +29,7 @@ export default function SetupPhase() {
     setLanguage,
     toggleCategory,
     addCustomCategory,
+    removeCustomCategory,
     setCustomCategory,
     toggleHints,
     startGame,
@@ -232,25 +233,49 @@ export default function SetupPhase() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {allCategories.map((category) => (
-                <div
-                  key={category}
-                  className="flex items-center space-x-3 p-3 rounded-lg bg-zinc-800/30 hover:bg-zinc-800/50 transition-colors cursor-pointer"
-                  onClick={() => toggleCategory(category)}
-                >
-                  <Checkbox
-                    checked={gameState.selectedCategories.includes(category)}
-                    onCheckedChange={() => toggleCategory(category)}
-                    className="border-zinc-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
-                  />
-                  <Label className="text-sm font-medium text-zinc-300 capitalize cursor-pointer">
-                    {categoryTranslations[
-                      category as keyof typeof categoryTranslations
-                    ] || `🏷️ ${category}`}
-                  </Label>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {allCategories.map((category) => {
+                const isCustomCategory = customCategories.includes(category);
+
+                return (
+                  <div
+                    key={category}
+                    className="flex items-center justify-between p-3 rounded-lg bg-zinc-800/30 hover:bg-zinc-800/50 transition-colors group"
+                  >
+                    <div
+                      className="flex items-center space-x-3 flex-1 cursor-pointer"
+                      onClick={() => toggleCategory(category)}
+                    >
+                      <Checkbox
+                        checked={gameState.selectedCategories.includes(
+                          category
+                        )}
+                        onCheckedChange={() => toggleCategory(category)}
+                        className="border-zinc-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
+                      />
+                      <Label className="text-sm font-medium text-zinc-300 capitalize cursor-pointer">
+                        {categoryTranslations[
+                          category as keyof typeof categoryTranslations
+                        ] || `🏷️ ${category}`}
+                      </Label>
+                    </div>
+
+                    {isCustomCategory && (
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeCustomCategory(category);
+                        }}
+                        variant="ghost"
+                        size="icon"
+                        className="text-red-400 hover:text-red-300 p-1 h-auto"
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             <Separator className="bg-zinc-700" />
@@ -264,7 +289,7 @@ export default function SetupPhase() {
                   placeholder="Enter custom category..."
                   value={gameState.customCategory || ""}
                   onChange={(e) => setCustomCategory(e.target.value)}
-                  onKeyPress={(e) =>
+                  onKeyDown={(e) =>
                     e.key === "Enter" && handleAddCustomCategory()
                   }
                   className="flex-1 bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-green-400 transition-colors"

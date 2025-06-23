@@ -15,6 +15,7 @@ interface GameStore {
   toggleCategory: (category: string) => void;
   addCustomCategory: (category: string) => void;
   setCustomCategory: (category: string) => void;
+  removeCustomCategory: (category: string) => void;
   toggleHints: () => void;
 
   startGame: (t: (key: string) => string) => Promise<void>;
@@ -119,6 +120,24 @@ export const useGameStore = create<GameStore>()(
                 category,
               ],
               customCategory: "",
+            },
+          };
+        });
+      },
+
+      removeCustomCategory: (category) => {
+        set((state) => {
+          const newCustomCategories = state.customCategories.filter(
+            (c) => c !== category
+          );
+          const newSelectedCategories =
+            state.gameState.selectedCategories.filter((c) => c !== category);
+
+          return {
+            customCategories: newCustomCategories,
+            gameState: {
+              ...state.gameState,
+              selectedCategories: newSelectedCategories,
             },
           };
         });
