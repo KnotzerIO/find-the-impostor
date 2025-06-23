@@ -245,11 +245,9 @@ export default function SetupPhase() {
                     className="border-zinc-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
                   />
                   <Label className="text-sm font-medium text-zinc-300 capitalize cursor-pointer">
-                    {
-                      categoryTranslations[
-                        category as keyof typeof categoryTranslations
-                      ]
-                    }
+                    {categoryTranslations[
+                      category as keyof typeof categoryTranslations
+                    ] || `🏷️ ${category}`}
                   </Label>
                 </div>
               ))}
