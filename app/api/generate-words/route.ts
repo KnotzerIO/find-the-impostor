@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
 
   try {
     // Multi-tier rate limiting
+    //! NOTE: Implement Redis or similar for distributed rate limiting
     for (const [tierName, tier] of Object.entries(RATE_LIMIT_TIERS)) {
       if (
         !openAIService.checkRateLimit(
@@ -129,7 +130,6 @@ export async function POST(request: NextRequest) {
 
     const { category, language, count, difficulty } = validation.data!;
 
-    // Generate sophisticated prompt
     const prompt = PromptEngine.createPrompt({
       category,
       language,
