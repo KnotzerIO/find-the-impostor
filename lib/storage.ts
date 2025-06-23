@@ -1,3 +1,4 @@
+import { WordWithHints } from "@/types/game";
 import Dexie, { Table } from "dexie";
 
 export interface WordSet {
@@ -7,11 +8,6 @@ export interface WordSet {
   wordsWithHints: WordWithHints[];
   createdAt: Date;
   usageCount?: number;
-}
-
-export interface WordWithHints {
-  word: string;
-  hints: string[];
 }
 
 export class GameDatabase extends Dexie {

@@ -48,7 +48,7 @@ export function IconBox({
   return (
     <div
       className={cn(
-        "rounded-lg flex items-center justify-center",
+        "flex items-center justify-center",
         colorMap[color],
         sizeMap[size].container,
         roundedMap[rounded],

@@ -1,11 +1,6 @@
-import { Locale } from "@/types/game";
+import { Locale, WordWithHints } from "@/types/game";
 import { db } from "./storage";
 import { FALLBACK_WORDS_WITH_HINTS } from "@/data/fallbackwords";
-
-export interface WordWithHints {
-  word: string;
-  hints: string[];
-}
 
 /**
  * Retrieves a random word with associated hints for a given category and language.
