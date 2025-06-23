@@ -11,7 +11,7 @@ export default function DiscussionPhase() {
   const startPlayer = gameState.players[startPlayerIndex];
 
   return (
-    <div className="h-screen flex justify-center items-center p-6">
+    <div className="h-dvh flex justify-center items-center p-6">
       <div className="max-w-sm mx-auto text-center space-y-16">
         <div className="space-y-6">
           <h1 className="text-5xl font-bold">{t("sayYourWords")}</h1>

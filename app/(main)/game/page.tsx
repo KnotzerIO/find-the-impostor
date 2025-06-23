@@ -30,7 +30,7 @@ export default function Game() {
   const PhaseComponent = phaseComponents[gameState.phase] || SetupPhase;
 
   return (
-    <div className="min-h-screen">
+    <div className="h-dvh">
       <Button
         onClick={handleReturn}
         variant="ghost"

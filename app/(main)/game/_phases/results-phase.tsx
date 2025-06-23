@@ -10,14 +10,16 @@ export function ResultsPhase() {
   const impostors = gameState.players.filter((p) => p.role === "impostor");
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
+    <div className="h-dvh bg-black text-white flex items-center justify-center p-6">
       <div className="w-md mx-auto text-center space-y-12">
         <div className="space-y-3">
           <h1 className="text-4xl font-bold">{t("results")}</h1>
         </div>
 
         <div className="space-y-3">
-          <p className="text-zinc-500 uppercase tracking-wider">{t("theWordWas")}</p>
+          <p className="text-zinc-500 uppercase tracking-wider">
+            {t("theWordWas")}
+          </p>
           <p className="text-3xl font-light text-blue-400">
             {gameState.currentWord}
           </p>
@@ -50,7 +52,7 @@ export function ResultsPhase() {
           className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 py-6 px-8 rounded-2xl text-lg font-light transition-all duration-200 backdrop-blur-sm"
         >
           <RotateCcw className="w-5 h-5 mr-3" />
-       {t("newGame")}
+          {t("newGame")}
         </Button>
       </div>
     </div>
