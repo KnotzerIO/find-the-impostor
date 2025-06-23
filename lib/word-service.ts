@@ -18,8 +18,6 @@ export async function getRandomWordWithHints(
         Math.floor(Math.random() * cached.wordsWithHints.length)
       ];
     }
-
-    // AI API versuchen
     const response = await fetch("/api/generate-words", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

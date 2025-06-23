@@ -285,7 +285,7 @@ export default function SetupPhase() {
               </Label>
               <div className="flex gap-3">
                 <Input
-                  placeholder="Enter custom category..."
+                  placeholder={t("customCategoryPlaceholder")}
                   value={gameState.customCategory || ""}
                   onChange={(e) => setCustomCategory(e.target.value)}
                   onKeyDown={(e) =>
@@ -306,9 +306,7 @@ export default function SetupPhase() {
 
             {gameState.selectedCategories.length === 0 && (
               <div className="p-3 rounded-lg bg-red-950/20 border border-red-900/30">
-                <p className="text-red-400 text-sm">
-                  Please select at least one category
-                </p>
+                <p className="text-red-400 text-sm">{t("selectCategory")}</p>
               </div>
             )}
           </CardContent>
@@ -319,7 +317,7 @@ export default function SetupPhase() {
           disabled={isStarting || gameState.selectedCategories.length === 0}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200 disabled:bg-zinc-700 disabled:cursor-not-allowed"
         >
-          {isStarting ? "Starting Game..." : "Start Game"}
+          {isStarting ? t("generateWords") : t("startGame")}
         </Button>
       </div>
     </div>
