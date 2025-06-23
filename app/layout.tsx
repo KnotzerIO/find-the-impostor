@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Script
-        async
-        src={process.env.UMAMI_SCRIPT_URL}
-        data-website-id={process.env.UMAMI_WEBSITE_ID}
-      />
+      {process.env.NODE_ENV === "production" &&
+        process.env.UMAMI_SCRIPT_URL &&
+        process.env.UMAMI_WEBSITE_ID && (
+          <Script
+            async
+            src={process.env.UMAMI_SCRIPT_URL}
+            data-website-id={process.env.UMAMI_WEBSITE_ID}
+          />
+        )}
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
-        {children}
+        <NextIntlClientProvider> {children}</NextIntlClientProvider>
       </body>
     </html>
   );

@@ -3,5 +3,56 @@
         "title": "FIND THE",
         "slogan": "Talk is cheap, lies are priceless",
         "startGame": "Start Game"
+    },
+    "SetupPhase": {
+        "gameSetup": "Game Setup",
+        "configureSettings": "Configure your game settings before starting the match.",
+        "players": "Players",
+        "numberOfPlayers": "Number of Players:",
+        "playerNames": "Player Names",
+        "player": "Player",
+        "gameSettings": "Game Settings",
+        "language": "Language",
+        "showHints": "Show hints to impostors",
+        "categories": "Categories",
+        "addCustomCategory": "Add Custom Category",
+        "customCategoryPlaceholder": "Enter custom category...",
+        "selectCategory": "Please select at least one category",
+        "startGame": "Start Game",
+        "startingGame": "Starting Game...",
+        "animals": "Animals",
+        "food": "Food",
+        "objects": "Objects",
+        "movies": "Movies",
+        "places": "Places",
+        "professions": "Professions"
+    },
+    "WordRevealPhase": {
+        "chooseYourCard": "Choose Your Card",
+        "selectAnyCard": "Select any card to reveal that player's role",
+        "playersRevealed": "players revealed",
+        "of": "of",
+        "tapToReveal": "Tap to reveal",
+        "allCardsRevealed": "All Cards Revealed",
+        "everyPlayerSeen": "Every player has seen their role",
+        "startDiscussion": "Start Game",
+        "player": "Player",
+        "readyToReveal": "Ready to reveal your role?",
+        "impostor": "IMPOSTOR",
+        "yourHint": "Your hint:",
+        "yourWordIs": "Your word is:",
+        "flipCard": "Flip Card",
+        "nextPlayer": "Next Player"
+    },
+    "DiscussionPhase": {
+        "sayYourWords": "Say Your Words",
+        "starts": "starts",
+        "revealImpostor": "Reveal Impostor"
+    },
+    "ResultsPhase": {
+        "results": "Results",
+        "theWordWas": "The Word Was",
+        "newGame": "New Game",
+        "category": "Category"
     }
 }
