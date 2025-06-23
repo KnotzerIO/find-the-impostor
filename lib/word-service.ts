@@ -1,11 +1,6 @@
-import { Locale } from "@/types/game";
+import { Locale, WordWithHints } from "@/types/game";
 import { db } from "./storage";
 import { FALLBACK_WORDS_WITH_HINTS } from "@/data/fallbackwords";
-
-export interface WordWithHints {
-  word: string;
-  hints: string[];
-}
 
 export async function getRandomWordWithHints(
   category: string,

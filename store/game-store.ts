@@ -149,7 +149,7 @@ export const useGameStore = create<GameStore>()(
         const { gameState, playerNames } = get();
 
         if (gameState.selectedCategories.length === 0) {
-          alert("Bitte wähle mindestens eine Kategorie aus");
+          console.error("No categories selected");
           return;
         }
 

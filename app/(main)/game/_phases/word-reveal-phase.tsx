@@ -167,7 +167,7 @@ export default function WordRevealPhase() {
                   <div className="text-center space-y-4">
                     {isImpostor ? (
                       <div className="space-y-4">
-                        <div className="w-20 h-20 mx-auto bg-purple-600/20 rounded-full flex items-center justify-center border-2 border-pruple-500">
+                        <div className="w-20 h-20 mx-auto bg-purple-600/20 rounded-full flex items-center justify-center border-2 border-purple-500">
                           <Drama className="w-10 h-10 text-purple-400" />
                         </div>
                         <div className="space-y-2">
