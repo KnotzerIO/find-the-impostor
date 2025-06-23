@@ -167,11 +167,9 @@ Always respond with valid JSON matching the requested schema. No additional text
   }
 }
 
-// Singleton instance
 export const openAIService = new OpenAIService({
   apiKey: process.env.OPENAI_API_KEY!,
   baseUrl: process.env.OPENAI_API_BASE!,
-  model:
-    process.env.OPENROUTER_MODEL || "meta-llama/llama-3.1-8b-instruct:free",
-  fallbackModel: process.env.OPENROUTER_FALLBACK_MODEL || "openai/gpt-4o-mini",
+  model: process.env.LLM_MODEL || "meta-llama/llama-4-maverick:free",
+  fallbackModel: process.env.LLM_FALLBACK_MODEL || "deepseek/deepseek-r1:free ",
 });
