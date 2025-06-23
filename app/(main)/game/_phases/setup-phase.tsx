@@ -250,7 +250,6 @@ export default function SetupPhase() {
                         checked={gameState.selectedCategories.includes(
                           category
                         )}
-                        onCheckedChange={() => toggleCategory(category)}
                         className="border-zinc-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
                       />
                       <Label className="text-sm font-medium text-zinc-300 capitalize cursor-pointer">
