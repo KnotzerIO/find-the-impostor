@@ -7,7 +7,6 @@ export async function getRandomWordWithHints(
   language: Locale
 ): Promise<WordWithHints> {
   try {
-    // Cache prüfen
     const cached = await db.wordSets
       .where(["category", "language"])
       .equals([category.toLowerCase(), language])
