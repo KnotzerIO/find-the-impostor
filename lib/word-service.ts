@@ -7,16 +7,31 @@ export async function getRandomWordWithHints(
   language: Locale
 ): Promise<WordWithHints> {
   try {
-    // Cache prüfen
     const cached = await db.wordSets
       .where(["category", "language"])
       .equals([category.toLowerCase(), language])
       .first();
 
     if (cached && cached.wordsWithHints.length > 0) {
-      return cached.wordsWithHints[
-        Math.floor(Math.random() * cached.wordsWithHints.length)
-      ];
+      const randomIndex = Math.floor(
+        Math.random() * cached.wordsWithHints.length
+      );
+      const selectedWord = cached.wordsWithHints[randomIndex];
+      const remainingWords = cached.wordsWithHints.filter(
+        (_, index) => index !== randomIndex
+      );
+
+      // Remove the selected word from the cache
+      if (remainingWords.length > 0) {
+        await db.wordSets.update(cached.id, {
+          wordsWithHints: remainingWords,
+          usageCount: (cached.usageCount || 0) + 1,
+        });
+      } else {
+        await db.wordSets.delete(cached.id);
+      }
+
+      return selectedWord;
     }
     const response = await fetch("/api/generate-words", {
       method: "POST",
@@ -26,22 +41,28 @@ export async function getRandomWordWithHints(
 
     if (response.ok) {
       const data = await response.json();
+      const randomIndex = Math.floor(
+        Math.random() * data.wordsWithHints.length
+      );
+      const selectedWord = data.wordsWithHints[randomIndex];
+      const remainingWords: WordWithHints[] = data.wordsWithHints.filter(
+        (_: WordWithHints, index: number) => index !== randomIndex
+      );
+      if (remainingWords.length > 0) {
+        await db.wordSets.add({
+          id: `${category.toLowerCase()}-${language}-${Date.now()}`,
+          category: category.toLowerCase(),
+          wordsWithHints: remainingWords,
+          language,
+          createdAt: new Date(),
+          usageCount: 1,
+        });
+      }
 
-      await db.wordSets.add({
-        id: `${category.toLowerCase()}-${language}-${Date.now()}`,
-        category: category.toLowerCase(),
-        wordsWithHints: data.wordsWithHints,
-        language,
-        createdAt: new Date(),
-        usageCount: 1,
-      });
-
-      return data.wordsWithHints[
-        Math.floor(Math.random() * data.wordsWithHints.length)
-      ];
+      return selectedWord;
     }
   } catch (error) {
-    console.error("Fehler beim Wörter laden:", error);
+    console.error("Error loading words:", error);
   }
 
   const categoryKey =
