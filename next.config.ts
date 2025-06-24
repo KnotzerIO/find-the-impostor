@@ -5,7 +5,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   compiler: {
     // Remove all console logs, excluding error logs
-    removeConsole: { exclude: ["error"] },
+    removeConsole:
+      process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
 };
 const withNextIntl = createNextIntlPlugin();
