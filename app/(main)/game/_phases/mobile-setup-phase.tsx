@@ -63,15 +63,7 @@ export default function MobileSetupPhase() {
   const getCategoryDisplayText = () => {
     if (gameState.selectedCategories.length === 1) {
       const category = gameState.selectedCategories[0];
-      const translations: Record<string, string> = {
-        animals: t("animals"),
-        food: t("food"),
-        objects: t("objects"),
-        movies: t("movies"),
-        places: t("places"),
-        professions: t("professions"),
-      };
-      return translations[category] || category;
+      return t(category, { fallback: category });
     }
     return `${gameState.selectedCategories.length} ${t("selected")}`;
   };
