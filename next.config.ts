@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     removeConsole:
       process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
+  reactStrictMode: true,
 };
 const withNextIntl = createNextIntlPlugin();
 export default withSentryConfig(withNextIntl(nextConfig), {
