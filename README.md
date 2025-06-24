@@ -154,6 +154,7 @@ npm run start
 ### **Analytics & Monitoring**
 
 - **[Umami](https://umami.is/)** - Privacy-focused web analytics
+- **[Sentry](https://sentry.io/)** - Error tracking and performance monitoring
 
 ### **Development Tools**
 
