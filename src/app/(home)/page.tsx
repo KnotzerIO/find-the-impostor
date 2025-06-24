@@ -18,6 +18,7 @@ export default function Home() {
             src="/images/impostor-logo.webp"
             alt="Impostor Logo"
             fill
+            sizes="320px"
             className="object-contain"
             priority
           />
