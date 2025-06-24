@@ -14,7 +14,7 @@ interface RateLimitTier {
 const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   default: {
     windowMs: 60 * 1000, // 1 minute
-    maxRequests: 2, // 5 requests per minute
+    maxRequests: 2, // 2 requests per minute
     description: "Standard rate limit",
   },
   burst: {
@@ -195,7 +195,6 @@ export async function POST(request: NextRequest) {
           "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600", // 30min cache, 1hr stale
           "Content-Type": "application/json",
           "X-Response-Time": responseTime.toString(),
-          "X-Rate-Limit-Remaining": "4", // Approximate, would need Redis for accuracy
         },
       }
     );
