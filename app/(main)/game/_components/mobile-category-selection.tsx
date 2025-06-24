@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -6,16 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Check, Plus, X } from "lucide-react";
+import { GameState, TranslationFunction } from "@/types/game";
 
 interface MobileCategorySelectionProps {
   onBack: () => void;
-  gameState: any;
+  gameState: GameState;
   customCategories: string[];
   toggleCategory: (category: string) => void;
   addCustomCategory: (category: string) => void;
   removeCustomCategory: (category: string) => void;
   setCustomCategory: (category: string) => void;
-  t: any;
+  t: TranslationFunction;
 }
 
 const defaultCategories = [
@@ -154,7 +154,7 @@ export default function MobileCategorySelection({
                           setShowAddCustom(false);
                         }
                       }}
-                      className="flex-1 h-10 bg-transparent text-white ocus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                      className="flex-1 h-10 bg-transparent text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                       autoFocus
                     />
                     <div className="flex items-center gap-2">

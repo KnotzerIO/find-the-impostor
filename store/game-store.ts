@@ -1,14 +1,19 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { getRandomWordWithHints } from "@/lib/word-service";
-import type { GameState, Locale, Player } from "@/types/game";
+import type {
+  GameState,
+  Locale,
+  Player,
+  TranslationFunction,
+} from "@/types/game";
 
 interface GameStore {
   gameState: GameState;
   playerNames: string[];
   customCategories: string[];
 
-  setPlayerCount: (count: number, t: (key: string) => string) => void;
+  setPlayerCount: (count: number, t: TranslationFunction) => void;
   setPlayerName: (index: number, name: string) => void;
   setImpostorCount: (count: number) => void;
   setLanguage: (language: Locale) => void;
@@ -18,7 +23,7 @@ interface GameStore {
   removeCustomCategory: (category: string) => void;
   toggleHints: () => void;
 
-  startGame: (t: (key: string) => string) => Promise<void>;
+  startGame: (t: TranslationFunction) => Promise<void>;
   nextRevealPlayer: () => void;
   startDiscussion: () => void;
   endGame: () => void;
@@ -164,7 +169,7 @@ export const useGameStore = create<GameStore>()(
         }));
       },
 
-      startGame: async (t: (key: string) => string) => {
+      startGame: async (t: TranslationFunction) => {
         const { gameState, playerNames } = get();
 
         if (gameState.selectedCategories.length === 0) {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,14 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Users, Plus, X, Edit3, Check } from "lucide-react";
+import { GameState, TranslationFunction } from "@/types/game";
 
 interface MobilePlayerManagementProps {
   onBack: () => void;
-  gameState: any;
+  gameState: GameState;
   playerNames: string[];
-  setPlayerCount: (count: number, t: any) => void;
+  setPlayerCount: (count: number, t: TranslationFunction) => void;
   setPlayerName: (index: number, name: string) => void;
-  t: any;
+  t: TranslationFunction;
 }
 
 export default function MobilePlayerManagement({
