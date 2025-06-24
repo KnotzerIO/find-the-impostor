@@ -33,7 +33,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="text-center py-1 text-gray-500 text-sm">
+      <div className="text-center pb-3 text-gray-500 text-sm">
         © {new Date().getFullYear()} Mark Knotzer
       </div>
     </div>
