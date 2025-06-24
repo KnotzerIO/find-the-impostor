@@ -7,7 +7,6 @@
   </a>
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-15.3-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=flat-square&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
@@ -24,36 +23,43 @@
 ## 🎮 How to Play
 
 ### 📋 **Game Setup**
+
 1. **Configure Players**: Set up 3-10 players with custom names
 2. **Choose Categories**: Select word categories (animals, food, movies, etc.) or create your own
 3. **Set Impostors**: Decide how many players will be impostors (1-3 recommended)
 4. **Optional Hints**: Enable hints to help impostors blend in
 
 ### 🎭 **Role Assignment**
+
 - **👥 Regular Players**: Know the secret word and must work together to find impostors
 - **🕵️ Impostors**: Don't know the secret word but can see optional hints to help them guess
 
 ### 📱 **Word Reveal Phase**
+
 - Players take turns looking at their phone/device privately
 - **Regular players** see the exact secret word (e.g., "Pizza")
 - **Impostors** see only category hints (e.g., "Food item, often round, has toppings")
 
 ### 💬 **Discussion Rounds**
+
 1.  Each player says **one word** related to the secret word
-   - Regular players try to give clues without being too obvious
-   - Impostors try to guess and blend in based on others' words
+
+- Regular players try to give clues without being too obvious
+- Impostors try to guess and blend in based on others' words
+
 2. **Final Discussion**: After 2 Rounds open a discussion about who might be the impostor
 
 ### 🗳️ **Voting & Results**
+
 - All players vote for who they think is the impostor
 - Reveal roles and see who won:
   - **Regular Players Win**: If they correctly identify all impostors
   - **Impostors Win**: If they avoid detection or correctly guess the secret word
 
 ### 🎯 **Strategy Tips**
+
 - **For Regular Players**: Give specific but not obvious clues, watch for players who seem unsure
 - **For Impostors**: Listen carefully to others' clues, ask strategic questions, don't be too vague or too specific
-
 
 ---
 
