@@ -1,0 +1,7 @@
+{
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "arrowParens": "avoid",
+  "trailingComma": "all",
+  "printWidth": 80,
+  "tabWidth": 2
+}
