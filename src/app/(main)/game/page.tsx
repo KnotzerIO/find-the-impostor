@@ -11,7 +11,7 @@ import SetupPhase from "./_phases/setup-phase";
 import WordRevealPhase from "./_phases/word-reveal-phase";
 
 export default function Game() {
-  const { gameState, newGame, setPhase } = useGameStore();
+  const { gameState, newGame, setPhase, _hasHydrated } = useGameStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Game() {
     }
   };
 
-  if (!gameState.phase) {
+  if (!gameState.phase || !_hasHydrated) {
     return null;
   }
 

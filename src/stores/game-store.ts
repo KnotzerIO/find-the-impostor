@@ -12,6 +12,8 @@ interface GameStore {
   gameState: GameState;
   playerNames: string[];
   customCategories: string[];
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 
   setPlayerCount: (count: number, t: TranslationFunction) => void;
   setPlayerName: (index: number, name: string) => void;
@@ -52,7 +54,8 @@ export const useGameStore = create<GameStore>()(
 
       playerNames: [],
       customCategories: [],
-
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
       setPlayerCount: (count, t) => {
         set((state) => {
           const newPlayerNames = Array.from(
@@ -275,6 +278,9 @@ export const useGameStore = create<GameStore>()(
           showHintsToImpostors: state.gameState.showHintsToImpostors,
         },
       }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );
