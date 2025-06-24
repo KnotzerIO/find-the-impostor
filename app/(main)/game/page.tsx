@@ -2,22 +2,18 @@
 import { Button } from "@/components/ui/button";
 import { useGameStore } from "@/store/game-store";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import DiscussionPhase from "./_phases/discussion-phase";
+import MobileSetupPhase from "./_phases/mobile-setup-phase";
 import { ResultsPhase } from "./_phases/results-phase";
 import SetupPhase from "./_phases/setup-phase";
 import WordRevealPhase from "./_phases/word-reveal-phase";
-import { useRouter } from "next/navigation";
-
-const phaseComponents = {
-  setup: SetupPhase,
-  wordreveal: WordRevealPhase,
-  discussion: DiscussionPhase,
-  results: ResultsPhase,
-};
 
 export default function Game() {
   const { gameState, newGame } = useGameStore();
   const router = useRouter();
+
+  if (!gameState.phase) gameState.phase = "setup";
 
   const handleReturn = () => {
     if (gameState.phase === "setup") {
@@ -27,19 +23,34 @@ export default function Game() {
     }
   };
 
-  const PhaseComponent = phaseComponents[gameState.phase] || SetupPhase;
-
   return (
     <div className="h-dvh">
+      {/* Button - hidden on mobile during setup because it needs different logic */}
       <Button
         onClick={handleReturn}
         variant="ghost"
         size="icon"
-        className="absolute top-6 left-2 z-10"
+        className={`absolute top-6 left-2 z-10 ${
+          gameState.phase === "setup" ? "max-md:hidden" : ""
+        }`}
       >
         <ArrowLeft className="size-6" />
       </Button>
-      <PhaseComponent />
+
+      {gameState.phase === "setup" && (
+        <>
+          <div className="hidden md:block">
+            <SetupPhase />
+          </div>
+          <div className="md:hidden">
+            <MobileSetupPhase />
+          </div>
+        </>
+      )}
+
+      {gameState.phase === "wordreveal" && <WordRevealPhase />}
+      {gameState.phase === "discussion" && <DiscussionPhase />}
+      {gameState.phase === "results" && <ResultsPhase />}
     </div>
   );
 }

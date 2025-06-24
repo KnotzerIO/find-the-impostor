@@ -13,10 +13,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useGameStore } from "@/store/game-store";
 import { Locale } from "@/types/game";
-import { Plus, Settings, Tag, User, X } from "lucide-react";
+import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
 import { useState } from "react";
 import { IconBox } from "../_components/icon-box";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export default function SetupPhase() {
   const {
@@ -37,7 +38,7 @@ export default function SetupPhase() {
 
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
-
+  const router = useRouter();
   const categoryTranslations = {
     animals: `🐾 ${t("animals")}`,
     food: `🍕 ${t("food")}`,
@@ -80,6 +81,14 @@ export default function SetupPhase() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
+      <Button
+        onClick={() => router.push("/")}
+        variant="ghost"
+        size="icon"
+        className="absolute top-6 left-2 z-10"
+      >
+        <ArrowLeft className="size-6" />
+      </Button>
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold">{t("gameSetup")}</h1>
