@@ -1,18 +1,18 @@
-import { useGameStore } from "@/store/game-store";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useGameStore } from "@/store/game-store";
 import {
-  RotateCcw,
-  Users,
-  MessageCircle,
+  Drama,
   Eye,
   EyeOff,
-  Drama,
+  MessageCircle,
+  RotateCcw,
+  Users,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export default function WordRevealPhase() {
   const { gameState, nextRevealPlayer, startDiscussion } = useGameStore();
@@ -28,6 +28,12 @@ export default function WordRevealPhase() {
   const handleCardSelect = (index: number) => {
     setSelectedCardIndex(index);
     setIsCardFlipped(false);
+
+    //TODO: integrate dialog instead of view
+    // Force scroll to top immediately on user interaction
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0; // Safari iOS
+    document.documentElement.scrollTop = 0;
   };
 
   const handleCardFlip = () => {
@@ -81,7 +87,9 @@ export default function WordRevealPhase() {
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold">{t("chooseYourCard")}</h1>
-            <p className="text-zinc-400">{t("selectAnyCard")}</p>
+            <p className="text-zinc-400 hidden md:block">
+              {t("selectAnyCard")}
+            </p>
             <Badge variant="outline" className="border-zinc-600 text-zinc-300">
               {revealedPlayers.length} {t("of")} {gameState.players.length}{" "}
               {t("playersRevealed")}
@@ -96,7 +104,7 @@ export default function WordRevealPhase() {
                 <Card
                   key={index}
                   className={`
-                   transition-all duration-300
+                   transition-all duration-300 md:py-6 py-0
                   ${
                     hasBeenRevealed
                       ? "bg-gray-800/30 border-gray-700 opacity-60 pointer-events-none"
@@ -106,7 +114,7 @@ export default function WordRevealPhase() {
                 `}
                   onClick={() => handleCardSelect(index)}
                 >
-                  <CardContent className="p-6 text-center space-y-4">
+                  <CardContent className="sm:p-6 p-3 text-center space-y-4">
                     <div className="w-16 h-16 mx-auto bg-purple rounded-xl flex items-center justify-center text-2xl">
                       {hasBeenRevealed ? (
                         <Eye className="w-8 h-8 text-zinc-500" />
