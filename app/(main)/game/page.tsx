@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useGameStore } from "@/store/game-store";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import DiscussionPhase from "./_phases/discussion-phase";
 import MobileSetupPhase from "./_phases/mobile-setup-phase";
 import { ResultsPhase } from "./_phases/results-phase";
@@ -10,10 +11,14 @@ import SetupPhase from "./_phases/setup-phase";
 import WordRevealPhase from "./_phases/word-reveal-phase";
 
 export default function Game() {
-  const { gameState, newGame } = useGameStore();
+  const { gameState, newGame, setPhase } = useGameStore();
   const router = useRouter();
 
-  if (!gameState.phase) gameState.phase = "setup";
+  useEffect(() => {
+    if (!gameState.phase) {
+      setPhase("setup");
+    }
+  }, [gameState.phase, setPhase]);
 
   const handleReturn = () => {
     if (gameState.phase === "setup") {
@@ -22,6 +27,10 @@ export default function Game() {
       newGame();
     }
   };
+
+  if (!gameState.phase) {
+    return null;
+  }
 
   return (
     <div className="h-dvh">
