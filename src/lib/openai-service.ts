@@ -19,7 +19,7 @@ export class OpenAIService {
   async generateWords(
     prompt: string,
     schema: any,
-    retryCount = 0
+    retryCount = 0,
   ): Promise<{ wordsWithHints: WordWithHints[] }> {
     const maxRetries = this.config.fallbackModel ? 1 : 0;
     const currentModel =
@@ -63,7 +63,7 @@ export class OpenAIService {
         throw new Error(
           `OpenRouter API error (${currentModel}): ${response.status} - ${
             errorData?.error?.message || response.statusText
-          }`
+          }`,
         );
       }
 
@@ -83,7 +83,7 @@ export class OpenAIService {
       // Retry with fallback model if available
       if (retryCount < maxRetries && this.config.fallbackModel) {
         console.log(
-          `Retrying with fallback model: ${this.config.fallbackModel}`
+          `Retrying with fallback model: ${this.config.fallbackModel}`,
         );
         return this.generateWords(prompt, schema, retryCount + 1);
       }
@@ -124,13 +124,13 @@ Always respond with valid JSON matching the requested schema. No additional text
   checkRateLimit(
     ip: string,
     windowMs: number = 60000,
-    maxRequests: number = 15
+    maxRequests: number = 15,
   ): boolean {
     const now = Date.now();
     const userRequests = this.requestQueue.get(ip) || [];
 
     // Clean old requests outside the window
-    const recentRequests = userRequests.filter((time) => now - time < windowMs);
+    const recentRequests = userRequests.filter(time => now - time < windowMs);
 
     if (recentRequests.length >= maxRequests) {
       return false;
@@ -144,7 +144,7 @@ Always respond with valid JSON matching the requested schema. No additional text
       this.requestQueue.size > 0 &&
       Array.from(this.requestQueue.values()).reduce(
         (sum, reqs) => sum + reqs.length,
-        0
+        0,
       ) %
         100 ===
         0
@@ -158,7 +158,7 @@ Always respond with valid JSON matching the requested schema. No additional text
   private cleanupRateLimit(windowMs: number) {
     const now = Date.now();
     for (const [ip, requests] of this.requestQueue.entries()) {
-      const recentRequests = requests.filter((time) => now - time < windowMs);
+      const recentRequests = requests.filter(time => now - time < windowMs);
       if (recentRequests.length === 0) {
         this.requestQueue.delete(ip);
       } else {
@@ -173,7 +173,7 @@ Always respond with valid JSON matching the requested schema. No additional text
       activeIPs: this.requestQueue.size,
       totalRecentRequests: Array.from(this.requestQueue.values()).reduce(
         (sum, requests) => sum + requests.length,
-        0
+        0,
       ),
     };
   }
@@ -185,7 +185,7 @@ if (
   !process.env.LLM_MODEL
 ) {
   throw new Error(
-    "Missing required environment variables: OPENAI_API_KEY and OPENAI_API_BASE and LLM_MODEL"
+    "Missing required environment variables: OPENAI_API_KEY and OPENAI_API_BASE and LLM_MODEL",
   );
 }
 

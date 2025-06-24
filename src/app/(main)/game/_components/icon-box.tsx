@@ -41,7 +41,7 @@ export function IconBox({
         colorMap[color],
         sizeMap[size].container,
         roundedMap[rounded],
-        className
+        className,
       )}
     >
       <Icon className={cn(sizeMap[size].icon, "text-white")} />

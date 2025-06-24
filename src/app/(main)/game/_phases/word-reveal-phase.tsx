@@ -18,7 +18,7 @@ export default function WordRevealPhase() {
   const { gameState, nextRevealPlayer, startDiscussion } = useGameStore();
   const t = useTranslations("WordRevealPhase");
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null
+    null,
   );
   const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [randomHint, setRandomHint] = useState<string>("");
@@ -61,19 +61,19 @@ export default function WordRevealPhase() {
 
   if (allPlayersRevealed) {
     return (
-      <div className="h-dvh overflow-hidden bg-black text-white flex items-center justify-center p-6">
-        <div className="max-w-md mx-auto text-center space-y-6">
+      <div className="flex h-dvh items-center justify-center overflow-hidden bg-black p-6 text-white">
+        <div className="mx-auto max-w-md space-y-6 text-center">
           <div className="space-y-2">
-            <Users className="w-16 h-16 mx-auto text-green-400" />
+            <Users className="mx-auto h-16 w-16 text-green-400" />
             <h1 className="text-3xl font-bold">{t("allCardsRevealed")}</h1>
             <p className="text-zinc-400">{t("everyPlayerSeen")}</p>
           </div>
 
           <Button
             onClick={startDiscussion}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200"
+            className="w-full rounded-xl bg-green-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-green-700"
           >
-            <MessageCircle className="w-5 h-5 mr-2" />
+            <MessageCircle className="mr-2 h-5 w-5" />
             {t("startDiscussion")}
           </Button>
         </div>
@@ -83,11 +83,11 @@ export default function WordRevealPhase() {
 
   if (selectedCardIndex === null) {
     return (
-      <div className="min-h-dvh bg-black text-white p-6">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
+      <div className="min-h-dvh bg-black p-6 text-white">
+        <div className="mx-auto max-w-4xl space-y-8">
+          <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">{t("chooseYourCard")}</h1>
-            <p className="text-zinc-400 hidden md:block">
+            <p className="hidden text-zinc-400 md:block">
               {t("selectAnyCard")}
             </p>
             <Badge variant="outline" className="border-zinc-600 text-zinc-300">
@@ -96,28 +96,24 @@ export default function WordRevealPhase() {
             </Badge>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {gameState.players.map((player, index) => {
               const hasBeenRevealed = revealedPlayers.includes(index);
 
               return (
                 <Card
                   key={index}
-                  className={`
-                   transition-all duration-300 md:py-6 py-0
-                  ${
+                  className={`py-0 transition-all duration-300 md:py-6 ${
                     hasBeenRevealed
-                      ? "bg-gray-800/30 border-gray-700 opacity-60 pointer-events-none"
-                      : "hover:bg-gray-800/50 hover:border-gray-600 hover:scale-105"
-                  }
-                  cursor-pointer
-                `}
+                      ? "pointer-events-none border-gray-700 bg-gray-800/30 opacity-60"
+                      : "hover:scale-105 hover:border-gray-600 hover:bg-gray-800/50"
+                  } cursor-pointer`}
                   onClick={() => handleCardSelect(index)}
                 >
-                  <CardContent className="sm:p-6 p-3 text-center space-y-4">
-                    <div className="w-16 h-16 mx-auto bg-purple rounded-xl flex items-center justify-center text-2xl">
+                  <CardContent className="space-y-4 p-3 text-center sm:p-6">
+                    <div className="bg-purple mx-auto flex h-16 w-16 items-center justify-center rounded-xl text-2xl">
                       {hasBeenRevealed ? (
-                        <Eye className="w-8 h-8 text-zinc-500" />
+                        <Eye className="h-8 w-8 text-zinc-500" />
                       ) : player.name.includes(t("player")) ? (
                         player.id
                       ) : (
@@ -144,9 +140,9 @@ export default function WordRevealPhase() {
   const isImpostor = selectedPlayer?.role === "impostor";
 
   return (
-    <div className="h-dvh bg-black text-white flex items-center justify-center p-6">
-      <div className="max-w-md mx-auto space-y-8">
-        <div className="text-center space-y-2">
+    <div className="flex h-dvh items-center justify-center bg-black p-6 text-white">
+      <div className="mx-auto max-w-md space-y-8">
+        <div className="space-y-2 text-center">
           <h2 className="text-2xl font-bold">{selectedPlayer.name}</h2>
           <Badge variant="outline" className="border-zinc-600 text-zinc-300">
             {t("player")} {selectedCardIndex + 1} {t("of")}{" "}
@@ -156,30 +152,30 @@ export default function WordRevealPhase() {
 
         <div className="relative">
           <Card
-            className={`bg-zinc-900/70 border-zinc-700 backdrop-blur-sm transition-all duration-500 transform min-w-xs ${
+            className={`min-w-xs transform border-zinc-700 bg-zinc-900/70 backdrop-blur-sm transition-all duration-500 ${
               isCardFlipped ? "scale-105" : ""
             }`}
           >
-            <CardContent className="p-8 w-full">
-              <div className="flex flex-col justify-center items-center space-y-6">
+            <CardContent className="w-full p-8">
+              <div className="flex flex-col items-center justify-center space-y-6">
                 {!isCardFlipped ? (
                   // Card Back
-                  <div className="text-center space-y-4">
-                    <div className="w-24 h-24 mx-auto bg-zinc-800 rounded-full flex items-center justify-center">
-                      <EyeOff className="w-12 h-12 text-zinc-600" />
+                  <div className="space-y-4 text-center">
+                    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-zinc-800">
+                      <EyeOff className="h-12 w-12 text-zinc-600" />
                     </div>
                     <p className="text-zinc-400">{t("readyToReveal")}</p>
                   </div>
                 ) : (
                   // Card Front
-                  <div className="text-center space-y-4">
+                  <div className="space-y-4 text-center">
                     {isImpostor ? (
                       <div className="space-y-4">
-                        <div className="w-20 h-20 mx-auto bg-purple-600/20 rounded-full flex items-center justify-center border-2 border-purple-500">
-                          <Drama className="w-10 h-10 text-purple-400" />
+                        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-purple-500 bg-purple-600/20">
+                          <Drama className="h-10 w-10 text-purple-400" />
                         </div>
                         <div className="space-y-2">
-                          <p className="text-3xl font-light text-purple tracking-wide">
+                          <p className="text-purple text-3xl font-light tracking-wide">
                             IMPOSTOR
                           </p>
                         </div>
@@ -191,8 +187,8 @@ export default function WordRevealPhase() {
                               <p className="text-sm text-zinc-400">
                                 {t("yourHint")}
                               </p>
-                              <div className="flex flex-wrap gap-2 justify-center">
-                                <Badge className="bg-purple-600/20 text-purple-300 border-purple-600/30">
+                              <div className="flex flex-wrap justify-center gap-2">
+                                <Badge className="border-purple-600/30 bg-purple-600/20 text-purple-300">
                                   {randomHint}
                                 </Badge>
                               </div>
@@ -202,12 +198,12 @@ export default function WordRevealPhase() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="w-20 h-20 mx-auto bg-purple-600/20 rounded-full flex items-center justify-center border-2 border-purple-500">
-                          <Eye className="w-10 h-10 text-purple-400" />
+                        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-purple-500 bg-purple-600/20">
+                          <Eye className="h-10 w-10 text-purple-400" />
                         </div>
                         <div className="space-y-2">
                           <p className="text-zinc-400">{t("yourWordIs")}</p>
-                          <p className="text-3xl font-light text-purple tracking-wide">
+                          <p className="text-purple text-3xl font-light tracking-wide">
                             {gameState.currentWord}
                           </p>
                         </div>
@@ -224,15 +220,15 @@ export default function WordRevealPhase() {
           {!isCardFlipped ? (
             <Button
               onClick={handleCardFlip}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200"
+              className="w-full rounded-xl bg-blue-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-blue-700"
             >
-              <RotateCcw className="w-5 h-5 mr-2" />
+              <RotateCcw className="mr-2 h-5 w-5" />
               {t("flipCard")}
             </Button>
           ) : (
             <Button
               onClick={handleNextPlayer}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200"
+              className="w-full rounded-xl bg-green-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-green-700"
             >
               {t("nextPlayer")}
             </Button>

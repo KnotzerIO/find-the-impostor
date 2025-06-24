@@ -1,25 +1,25 @@
 {
-    "name": "Find The Impostor",
-    "short_name": "Impostor",
-    "display": "standalone",
-    "orientation": "portrait",
-    "scope": "/",
-    "start_url": "/",
-    "icons": [
-        {
-            "src": "/images/logo-192.png",
-            "type": "image/png",
-            "sizes": "192x192"
-        },
-        {
-            "src": "/images/logo-256.png",
-            "type": "image/png",
-            "sizes": "256x256"
-        },
-        {
-            "src": "/images/logo-512.png",
-            "type": "image/png",
-            "sizes": "512x512"
-        }
-    ]
+  "name": "Find The Impostor",
+  "short_name": "Impostor",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/images/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/logo-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/images/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
 }

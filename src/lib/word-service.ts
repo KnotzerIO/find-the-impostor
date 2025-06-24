@@ -1,10 +1,10 @@
-import { Locale, WordWithHints } from "@/src/types/game";
 import { db } from "./storage";
 import { FALLBACK_WORDS_WITH_HINTS } from "@/src/data/fallbackwords";
+import { Locale, WordWithHints } from "@/src/types/game";
 
 export async function getRandomWordWithHints(
   category: string,
-  language: Locale
+  language: Locale,
 ): Promise<WordWithHints> {
   try {
     const cached = await db.wordSets
@@ -14,11 +14,11 @@ export async function getRandomWordWithHints(
 
     if (cached && cached.wordsWithHints.length > 0) {
       const randomIndex = Math.floor(
-        Math.random() * cached.wordsWithHints.length
+        Math.random() * cached.wordsWithHints.length,
       );
       const selectedWord = cached.wordsWithHints[randomIndex];
       const remainingWords = cached.wordsWithHints.filter(
-        (_, index) => index !== randomIndex
+        (_, index) => index !== randomIndex,
       );
 
       // Remove the selected word from the cache
@@ -42,11 +42,11 @@ export async function getRandomWordWithHints(
     if (response.ok) {
       const data = await response.json();
       const randomIndex = Math.floor(
-        Math.random() * data.wordsWithHints.length
+        Math.random() * data.wordsWithHints.length,
       );
       const selectedWord = data.wordsWithHints[randomIndex];
       const remainingWords: WordWithHints[] = data.wordsWithHints.filter(
-        (_: WordWithHints, index: number) => index !== randomIndex
+        (_: WordWithHints, index: number) => index !== randomIndex,
       );
       if (remainingWords.length > 0) {
         await db.wordSets.add({

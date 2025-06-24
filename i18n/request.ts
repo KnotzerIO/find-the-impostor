@@ -13,7 +13,7 @@ async function getPreferredLocale(): Promise<"en" | "de"> {
       // Parse Accept-Language header (z.B. "en-US,en;q=0.9,de;q=0.8")
       const languages = acceptLanguage
         .split(",")
-        .map((lang) => {
+        .map(lang => {
           const [code, quality] = lang.split(";q=");
           return {
             code: code.trim().split("-")[0], // "en-US" -> "en"

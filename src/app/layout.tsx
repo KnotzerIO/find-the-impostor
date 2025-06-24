@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
-import { NextIntlClientProvider } from "next-intl";
 import ThemeColor from "@/src/components/theme-color";
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +42,7 @@ export default function RootLayout({
         )}
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}
       >
         <ThemeColor />
         <NextIntlClientProvider> {children}</NextIntlClientProvider>

@@ -1,8 +1,10 @@
 "use client";
 
+import MobileCategorySelection from "../_components/mobile-category-selection";
+import MobileGameSettings from "../_components/mobile-game-settings";
+import MobilePlayerManagement from "../_components/mobile-player-management";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent } from "@/src/components/ui/card";
-import { useGameStore } from "@/src/stores/game-store";
 import {
   Select,
   SelectContent,
@@ -10,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
+import { Switch } from "@/src/components/ui/switch";
+import { useGameStore } from "@/src/stores/game-store";
 import {
   ArrowLeft,
   ChevronRight,
@@ -22,10 +26,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import MobileCategorySelection from "../_components/mobile-category-selection";
-import MobileGameSettings from "../_components/mobile-game-settings";
-import MobilePlayerManagement from "../_components/mobile-player-management";
-import { Switch } from "@/src/components/ui/switch";
 
 export default function MobileSetupPhase() {
   const {
@@ -112,7 +112,7 @@ export default function MobileSetupPhase() {
   }
 
   return (
-    <div className="h-dvh max-dvh bg-black">
+    <div className="max-dvh h-dvh bg-black">
       <Button
         onClick={() => router.back()}
         variant="ghost"
@@ -121,90 +121,90 @@ export default function MobileSetupPhase() {
       >
         <ArrowLeft className="size-6" />
       </Button>
-      <div className="container mx-auto px-4 py-6 space-y-8">
-        <div className="text-center space-y-2">
+      <div className="container mx-auto space-y-8 px-4 py-6">
+        <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold text-white">{t("gameSetup")}</h1>
         </div>
 
         <div className="space-y-6">
           <Card
-            className="p-0 rounded-3xl"
+            className="rounded-3xl p-0"
             onClick={() => setCurrentScreen("players")}
           >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center">
-                    <Users className="w-6 h-6 text-white" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500">
+                    <Users className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-medium text-lg">
+                    <div className="text-lg font-medium text-white">
                       {t("players")}
                     </div>
-                    <div className="text-gray-400 text-sm">
+                    <div className="text-sm text-gray-400">
                       {gameState.totalPlayers} {t("ready")}
                     </div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400" />
+                <ChevronRight className="h-5 w-5 text-gray-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card
-            className="p-0 rounded-3xl"
+            className="rounded-3xl p-0"
             onClick={() => setCurrentScreen("categories")}
           >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-500 rounded-2xl flex items-center justify-center">
-                    <Tag className="w-6 h-6 text-white" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-500">
+                    <Tag className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-medium text-lg">
+                    <div className="text-lg font-medium text-white">
                       {t("categories")}
                     </div>
-                    <div className="text-gray-400 text-sm">
+                    <div className="text-sm text-gray-400">
                       {getCategoryDisplayText()}
                     </div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400" />
+                <ChevronRight className="h-5 w-5 text-gray-400" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="p-0 rounded-3xl">
+          <Card className="rounded-3xl p-0">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center">
-                    <Eye className="w-6 h-6 text-white" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500">
+                    <Eye className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-medium text-lg">
+                    <div className="text-lg font-medium text-white">
                       Impostors
                     </div>
-                    <div className="text-gray-400 text-sm">
+                    <div className="text-sm text-gray-400">
                       {gameState.impostorCount} {t("of")}{" "}
                       {gameState.totalPlayers}
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center w-20">
+                <div className="flex w-20 items-center">
                   <Select
                     value={gameState.impostorCount.toString()}
-                    onValueChange={(value) => setImpostorCount(Number(value))}
+                    onValueChange={value => setImpostorCount(Number(value))}
                   >
-                    <SelectTrigger className="w-full h-10 bg-zinc-800/50 border-zinc-700 text-white rounded-xl">
+                    <SelectTrigger className="h-10 w-full rounded-xl border-zinc-700 bg-zinc-800/50 text-white">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="bg-zinc-900 border-zinc-700">
+                    <SelectContent className="border-zinc-700 bg-zinc-900">
                       {Array.from(
                         { length: gameState.totalPlayers - 1 },
-                        (_, i) => i + 1
-                      ).map((num) => (
+                        (_, i) => i + 1,
+                      ).map(num => (
                         <SelectItem
                           key={num}
                           value={num.toString()}
@@ -220,18 +220,18 @@ export default function MobileSetupPhase() {
             </CardContent>
           </Card>
 
-          <Card className="p-0 rounded-3xl">
+          <Card className="rounded-3xl p-0">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center">
-                    <Lightbulb className="w-6 h-6 text-white" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500">
+                    <Lightbulb className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-medium text-lg">
+                    <div className="text-lg font-medium text-white">
                       {t("hints")}
                     </div>
-                    <div className="text-gray-400 text-sm">
+                    <div className="text-sm text-gray-400">
                       {gameState.showHintsToImpostors
                         ? t("enabled")
                         : t("disabled")}
@@ -251,14 +251,14 @@ export default function MobileSetupPhase() {
             <Button
               onClick={handleStartGame}
               disabled={!canStartGame || isStarting}
-              className="w-full h-16 text-lg font-semibold bg-white text-black hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl"
+              className="h-16 w-full rounded-2xl bg-white text-lg font-semibold text-black hover:bg-gray-100 active:bg-gray-200 disabled:bg-gray-700 disabled:text-gray-400 disabled:opacity-50"
             >
-              <Play className="w-6 h-6 mr-3" />
+              <Play className="mr-3 h-6 w-6" />
               {isStarting ? t("generateWords") : t("startGame")}
             </Button>
 
             {!canStartGame && gameState.selectedCategories.length === 0 && (
-              <p className="text-red-400 text-sm text-center mt-3">
+              <p className="mt-3 text-center text-sm text-red-400">
                 {t("selectCategory")}
               </p>
             )}

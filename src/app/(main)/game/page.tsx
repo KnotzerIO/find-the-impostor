@@ -1,14 +1,15 @@
 "use client";
-import { Button } from "@/src/components/ui/button";
-import { useGameStore } from "@/src/stores/game-store";
-import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+
 import DiscussionPhase from "./_phases/discussion-phase";
 import MobileSetupPhase from "./_phases/mobile-setup-phase";
 import { ResultsPhase } from "./_phases/results-phase";
 import SetupPhase from "./_phases/setup-phase";
 import WordRevealPhase from "./_phases/word-reveal-phase";
+import { Button } from "@/src/components/ui/button";
+import { useGameStore } from "@/src/stores/game-store";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Game() {
   const { gameState, newGame, setPhase, _hasHydrated } = useGameStore();

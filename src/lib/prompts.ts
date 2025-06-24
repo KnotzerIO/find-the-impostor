@@ -179,8 +179,8 @@ Generate exactly ${
         Array.isArray(item.hints) &&
         item.hints.length === 3 &&
         item.hints.every(
-          (hint: any) => typeof hint === "string" && hint.trim().length > 0
-        )
+          (hint: any) => typeof hint === "string" && hint.trim().length > 0,
+        ),
     );
   }
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
-import { ArrowLeft, Check, Plus, X } from "lucide-react";
 import { GameState, TranslationFunction } from "@/src/types/game";
+import { ArrowLeft, Check, Plus, X } from "lucide-react";
+import { useState } from "react";
 
 interface MobileCategorySelectionProps {
   onBack: () => void;
@@ -40,8 +40,8 @@ export default function MobileCategorySelection({
   const [showAddCustom, setShowAddCustom] = useState(false);
 
   const allCategories = [
-    ...defaultCategories.map((cat) => ({ ...cat, isCustom: false })),
-    ...customCategories.map((cat) => ({
+    ...defaultCategories.map(cat => ({ ...cat, isCustom: false })),
+    ...customCategories.map(cat => ({
       id: cat,
       name: cat,
       emoji: "🎯",
@@ -75,21 +75,21 @@ export default function MobileCategorySelection({
       >
         <ArrowLeft className="size-6" />
       </Button>
-      <div className="container mx-auto px-4 py-6 space-y-8">
-        <div className="text-center space-y-2">
+      <div className="container mx-auto space-y-8 px-4 py-6">
+        <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold text-white">{t("categories")}</h1>
         </div>
         <div className="space-y-4">
           {/* All Categories */}
-          {allCategories.map((category) => (
+          {allCategories.map(category => (
             <div key={category.id}>
               <Card
-                className={`p-0 rounded-3xl ${
+                className={`rounded-3xl p-0 ${
                   gameState.selectedCategories.includes(category.id)
                     ? category.isCustom
-                      ? "bg-purple-500/20 border-purple-500/50"
-                      : "bg-blue-500/20 border-blue-500/50"
-                    : "bg-gray-900/50 border-gray-700 hover:bg-gray-800/60"
+                      ? "border-purple-500/50 bg-purple-500/20"
+                      : "border-blue-500/50 bg-blue-500/20"
+                    : "border-gray-700 bg-gray-900/50 hover:bg-gray-800/60"
                 }`}
                 onClick={() => handleCategorySelect(category.id)}
               >
@@ -98,7 +98,7 @@ export default function MobileCategorySelection({
                     <div className="text-3xl">{category.emoji}</div>
                     <div className="flex-1">
                       <div
-                        className={`font-semibold text-lg ${
+                        className={`text-lg font-semibold ${
                           gameState.selectedCategories.includes(category.id)
                             ? category.isCustom
                               ? "text-purple-400"
@@ -112,24 +112,24 @@ export default function MobileCategorySelection({
                     <div className="flex items-center gap-2">
                       {gameState.selectedCategories.includes(category.id) && (
                         <div
-                          className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                          className={`flex h-6 w-6 items-center justify-center rounded-full ${
                             category.isCustom ? "bg-purple-500" : "bg-blue-500"
                           }`}
                         >
-                          <Check className="w-4 h-4 text-white" />
+                          <Check className="h-4 w-4 text-white" />
                         </div>
                       )}
                       {category.isCustom && (
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.stopPropagation();
                             handleRemoveCustomCategory(category.id);
                           }}
-                          className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg"
+                          className="h-8 w-8 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="h-4 w-4" />
                         </Button>
                       )}
                     </div>
@@ -141,20 +141,20 @@ export default function MobileCategorySelection({
 
           {showAddCustom ? (
             <div>
-              <Card className="p-0 rounded-3xl">
+              <Card className="rounded-3xl p-0">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between gap-1">
                     <Input
                       placeholder={t("customCategoryPlaceholder")}
                       value={gameState.customCategory || ""}
-                      onChange={(e) => setCustomCategory(e.target.value)}
-                      onKeyDown={(e) => {
+                      onChange={e => setCustomCategory(e.target.value)}
+                      onKeyDown={e => {
                         if (e.key === "Enter") handleAddCustomCategory();
                         if (e.key === "Escape") {
                           setShowAddCustom(false);
                         }
                       }}
-                      className="flex-1 h-10 bg-transparent text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                      className="h-10 flex-1 bg-transparent text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                       autoFocus
                     />
                     <div className="flex items-center gap-2">
@@ -163,9 +163,9 @@ export default function MobileCategorySelection({
                         onClick={handleAddCustomCategory}
                         disabled={!gameState.customCategory}
                         size="icon"
-                        className="size-8 text-green-400 hover:bg-green-500/10 rounded-xl"
+                        className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
                       >
-                        <Check className="w-3 h-3" />
+                        <Check className="h-3 w-3" />
                       </Button>
                       <Button
                         variant="ghost"
@@ -173,9 +173,9 @@ export default function MobileCategorySelection({
                         onClick={() => {
                           setShowAddCustom(false);
                         }}
-                        className="size-8 text-gray-400 hover:bg-gray-500/10 rounded-xl"
+                        className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
                       >
-                        <X className="w-3 h-3" />
+                        <X className="h-3 w-3" />
                       </Button>
                     </div>
                   </div>
@@ -186,9 +186,9 @@ export default function MobileCategorySelection({
             <Button
               onClick={() => setShowAddCustom(true)}
               variant="outline"
-              className="w-full h-14 text-lg font-medium rounded-2xl bg-gray-900/50 border-gray-700 text-white hover:bg-gray-800/60"
+              className="h-14 w-full rounded-2xl border-gray-700 bg-gray-900/50 text-lg font-medium text-white hover:bg-gray-800/60"
             >
-              <Plus className="w-5 h-5 mr-3" />
+              <Plus className="mr-3 h-5 w-5" />
               {t("addCustomCategory") || "Add Custom"}
             </Button>
           )}
@@ -197,15 +197,15 @@ export default function MobileCategorySelection({
             <Button
               onClick={onBack}
               disabled={gameState.selectedCategories.length === 0}
-              className="w-full h-14 text-lg font-semibold bg-white text-black hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 rounded-2xl"
+              className="h-14 w-full rounded-2xl bg-white text-lg font-semibold text-black hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
             >
               {t("done") || "Done"} ({gameState.selectedCategories.length})
             </Button>
           </div>
 
           {gameState.selectedCategories.length === 0 && (
-            <div className="p-4 rounded-xl bg-red-950/20 border border-red-900/30">
-              <p className="text-red-400 text-sm text-center">
+            <div className="rounded-xl border border-red-900/30 bg-red-950/20 p-4">
+              <p className="text-center text-sm text-red-400">
                 {t("selectCategory")}
               </p>
             </div>

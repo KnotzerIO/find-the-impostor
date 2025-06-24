@@ -6,14 +6,14 @@ import Link from "next/link";
 export default function Home() {
   const t = useTranslations("Index");
   return (
-    <div className="bg-charcoal h-dvh max-h-dvh flex flex-col">
-      <div className="container mx-auto px-4 flex-1 flex flex-col items-center justify-center text-center w-full max-w-md">
-        <h1 className="text-4xl md:text-5xl font-bold bg-white bg-clip-text text-transparent">
+    <div className="bg-charcoal flex h-dvh max-h-dvh flex-col">
+      <div className="container mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-4 text-center">
+        <h1 className="bg-white bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
           {t("title")}
           <br />
           <span className="text-purple">IMPOSTOR</span>
         </h1>
-        <div className="relative size-80 mx-auto">
+        <div className="relative mx-auto size-80">
           <Image
             src="/images/impostor-logo.webp"
             alt="Impostor Logo"
@@ -22,10 +22,10 @@ export default function Home() {
             priority
           />
         </div>
-        <p className="text-gray-400 text-lg m-0">{t("slogan")}</p>
+        <p className="m-0 text-lg text-gray-400">{t("slogan")}</p>
         <Button
           asChild
-          className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 border-0 mt-4"
+          className="mt-4 h-14 w-full border-0 bg-gradient-to-r from-purple-600 to-indigo-600 text-lg hover:from-purple-700 hover:to-indigo-700"
         >
           <Link href="/game" className="text-white">
             {t("startGame")}
@@ -33,7 +33,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="text-center pb-3 text-gray-500 text-sm">
+      <div className="pb-3 text-center text-sm text-gray-500">
         © {new Date().getFullYear()} Mark Knotzer
       </div>
     </div>

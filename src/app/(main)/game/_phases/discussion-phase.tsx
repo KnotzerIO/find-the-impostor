@@ -17,14 +17,14 @@ export default function DiscussionPhase() {
   }, [playImpostorSound]);
 
   return (
-    <div className="h-dvh flex justify-center items-center p-6">
-      <div className="max-w-sm mx-auto text-center space-y-16">
+    <div className="flex h-dvh items-center justify-center p-6">
+      <div className="mx-auto max-w-sm space-y-16 text-center">
         <div className="space-y-6">
-          <p className="text-gray-400 text-2xl leading-relaxed">
+          <p className="text-2xl leading-relaxed text-gray-400">
             {t("sayYourWords")}
           </p>
-          <div className="w-20 h-20 mx-auto bg-green-500 rounded-full flex items-center justify-center">
-            <Play className="w-10 h-10 text-white fill-white" />
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-500">
+            <Play className="h-10 w-10 fill-white text-white" />
           </div>
 
           <div className="space-y-3">
@@ -37,9 +37,9 @@ export default function DiscussionPhase() {
 
         <Button
           onClick={endGame}
-          className="w-full bg-red-600 hover:bg-red-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200"
+          className="w-full rounded-xl bg-red-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-red-700"
         >
-          <Eye className="w-5 h-5 mr-3" />
+          <Eye className="mr-3 h-5 w-5" />
           {t("revealImpostor")}
         </Button>
       </div>

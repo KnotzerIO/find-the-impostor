@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextRequest, NextResponse } from "next/server";
-
-import { Locale } from "@/src/types/game";
-import { PromptEngine } from "@/src/lib/prompts";
 import { openAIService } from "@/src/lib/openai-service";
+import { PromptEngine } from "@/src/lib/prompts";
+import { Locale } from "@/src/types/game";
+import { NextRequest, NextResponse } from "next/server";
 
 interface RateLimitTier {
   windowMs: number;
@@ -97,11 +96,11 @@ export async function POST(request: NextRequest) {
         !openAIService.checkRateLimit(
           `${clientIP}:${tierName}`,
           tier.windowMs,
-          tier.maxRequests
+          tier.maxRequests,
         )
       ) {
         console.warn(
-          `Rate limit exceeded for ${clientIP} on ${tier.description}`
+          `Rate limit exceeded for ${clientIP} on ${tier.description}`,
         );
         return NextResponse.json(
           {
@@ -115,7 +114,7 @@ export async function POST(request: NextRequest) {
               "X-RateLimit-Limit": tier.maxRequests.toString(),
               "X-RateLimit-Window": tier.windowMs.toString(),
             },
-          }
+          },
         );
       }
     }
@@ -141,15 +140,15 @@ export async function POST(request: NextRequest) {
     console.log(
       `Generating ${count} words for category "${category}" in ${language} (${difficulty} difficulty) for IP: ${clientIP.substring(
         0,
-        8
-      )}...`
+        8,
+      )}...`,
     );
 
     const result = await openAIService.generateWords(prompt, {});
 
     if (!PromptEngine.validateResponse(result, count)) {
       throw new Error(
-        "Generated response does not match expected format or count"
+        "Generated response does not match expected format or count",
       );
     }
 
@@ -160,7 +159,8 @@ export async function POST(request: NextRequest) {
 
       const wordInHints = hints.some(
         (hint: string) =>
-          hint.toLowerCase().includes(word) || word.includes(hint.toLowerCase())
+          hint.toLowerCase().includes(word) ||
+          word.includes(hint.toLowerCase()),
       );
 
       return !wordInHints && word.length > 1;
@@ -173,7 +173,7 @@ export async function POST(request: NextRequest) {
     const responseTime = Date.now() - startTime;
 
     console.log(
-      `Successfully generated ${validWords.length}/${count} words in ${responseTime}ms for ${category}:${language}`
+      `Successfully generated ${validWords.length}/${count} words in ${responseTime}ms for ${category}:${language}`,
     );
 
     return NextResponse.json(
@@ -196,7 +196,7 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
           "X-Response-Time": responseTime.toString(),
         },
-      }
+      },
     );
   } catch (error) {
     const responseTime = Date.now() - startTime;
@@ -220,8 +220,8 @@ export async function POST(request: NextRequest) {
           errorType: isAPIError
             ? "api_error"
             : isRateLimitError
-            ? "rate_limit"
-            : "generation_error",
+              ? "rate_limit"
+              : "generation_error",
         },
       },
       {
@@ -229,7 +229,7 @@ export async function POST(request: NextRequest) {
         headers: {
           "X-Response-Time": responseTime.toString(),
         },
-      }
+      },
     );
   }
 }

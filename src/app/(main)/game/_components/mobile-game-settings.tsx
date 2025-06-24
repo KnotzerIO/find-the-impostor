@@ -50,27 +50,27 @@ export default function MobileGameSettings({
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="container mx-auto px-6 py-8 max-w-sm">
+      <div className="container mx-auto max-w-sm px-6 py-8">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="mb-8 flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={onBack}
             className="rounded-full"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="h-5 w-5" />
           </Button>
           <h1 className="text-2xl font-bold text-white">{t("gameSettings")}</h1>
         </div>
 
         <div className="space-y-6">
           {/* Impostors */}
-          <Card className="bg-zinc-900 border-zinc-800">
+          <Card className="border-zinc-800 bg-zinc-900">
             <CardHeader>
-              <CardTitle className="text-white text-lg flex items-center gap-3">
-                <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
-                  <Eye className="w-5 h-5 text-white" />
+              <CardTitle className="flex items-center gap-3 text-lg text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500">
+                  <Eye className="h-5 w-5 text-white" />
                 </div>
                 🎭 {t("impostors")}
               </CardTitle>
@@ -78,20 +78,20 @@ export default function MobileGameSettings({
             <CardContent>
               <Select
                 value={gameState.impostorCount.toString()}
-                onValueChange={(value) => setImpostorCount(Number(value))}
+                onValueChange={value => setImpostorCount(Number(value))}
               >
-                <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white h-12 rounded-xl">
+                <SelectTrigger className="h-12 rounded-xl border-zinc-700 bg-zinc-800/50 text-white">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-700 rounded-xl">
+                <SelectContent className="rounded-xl border-zinc-700 bg-zinc-900">
                   {Array.from(
                     { length: gameState.totalPlayers - 1 },
-                    (_, i) => i + 1
-                  ).map((num) => (
+                    (_, i) => i + 1,
+                  ).map(num => (
                     <SelectItem
                       key={num}
                       value={num.toString()}
-                      className="text-white focus:bg-zinc-800 rounded-lg"
+                      className="rounded-lg text-white focus:bg-zinc-800"
                     >
                       {num} Impostor{num > 1 ? "s" : ""}
                     </SelectItem>
@@ -102,11 +102,11 @@ export default function MobileGameSettings({
           </Card>
 
           {/* Language */}
-          <Card className="bg-zinc-900 border-zinc-800">
+          <Card className="border-zinc-800 bg-zinc-900">
             <CardHeader>
-              <CardTitle className="text-white text-lg flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-white" />
+              <CardTitle className="flex items-center gap-3 text-lg text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500">
+                  <Globe className="h-5 w-5 text-white" />
                 </div>
                 🌐 {t("language")}
               </CardTitle>
@@ -116,15 +116,15 @@ export default function MobileGameSettings({
                 value={gameState.language}
                 onValueChange={handleLanguageChange}
               >
-                <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white h-12 rounded-xl">
+                <SelectTrigger className="h-12 rounded-xl border-zinc-700 bg-zinc-800/50 text-white">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-700 rounded-xl">
-                  {languages.map((lang) => (
+                <SelectContent className="rounded-xl border-zinc-700 bg-zinc-900">
+                  {languages.map(lang => (
                     <SelectItem
                       key={lang.value}
                       value={lang.value}
-                      className="text-white focus:bg-zinc-800 rounded-lg"
+                      className="rounded-lg text-white focus:bg-zinc-800"
                     >
                       <span className="flex items-center gap-2">
                         {lang.flag} {lang.label}
@@ -137,7 +137,7 @@ export default function MobileGameSettings({
           </Card>
 
           {/* Hints Toggle */}
-          <Card className="bg-zinc-900 border-zinc-800">
+          <Card className="border-zinc-800 bg-zinc-900">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -145,11 +145,11 @@ export default function MobileGameSettings({
                     id="hints"
                     checked={gameState.showHintsToImpostors}
                     onCheckedChange={toggleHints}
-                    className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
+                    className="border-zinc-600 data-[state=checked]:border-purple-500 data-[state=checked]:bg-purple-500"
                   />
                   <Label
                     htmlFor="hints"
-                    className="text-white font-medium cursor-pointer"
+                    className="cursor-pointer font-medium text-white"
                   >
                     {t("showHints")}
                   </Label>

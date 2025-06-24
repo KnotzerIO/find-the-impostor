@@ -1,5 +1,3 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import { getRandomWordWithHints } from "@/src/lib/word-service";
 import type {
   GameState,
@@ -7,6 +5,8 @@ import type {
   Player,
   TranslationFunction,
 } from "@/src/types/game";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface GameStore {
   gameState: GameState;
@@ -55,12 +55,12 @@ export const useGameStore = create<GameStore>()(
       playerNames: [],
       customCategories: [],
       _hasHydrated: false,
-      setHasHydrated: (state) => set({ _hasHydrated: state }),
+      setHasHydrated: state => set({ _hasHydrated: state }),
       setPlayerCount: (count, t) => {
-        set((state) => {
+        set(state => {
           const newPlayerNames = Array.from(
             { length: count },
-            (_, i) => state.playerNames[i] || `${t("player")} ${i + 1}`
+            (_, i) => state.playerNames[i] || `${t("player")} ${i + 1}`,
           );
 
           return {
@@ -69,7 +69,7 @@ export const useGameStore = create<GameStore>()(
               totalPlayers: count,
               impostorCount: Math.min(
                 state.gameState.impostorCount,
-                Math.floor(count / 3)
+                Math.floor(count / 3),
               ),
             },
             playerNames: newPlayerNames,
@@ -78,30 +78,30 @@ export const useGameStore = create<GameStore>()(
       },
 
       setPlayerName: (index, name) => {
-        set((state) => {
+        set(state => {
           const updatedNames = [...state.playerNames];
           updatedNames[index] = name;
           return { playerNames: updatedNames };
         });
       },
 
-      setImpostorCount: (count) => {
-        set((state) => ({
+      setImpostorCount: count => {
+        set(state => ({
           gameState: { ...state.gameState, impostorCount: count },
         }));
       },
 
-      setLanguage: (language) => {
-        set((state) => ({
+      setLanguage: language => {
+        set(state => ({
           gameState: { ...state.gameState, language },
         }));
       },
 
-      toggleCategory: (category) => {
-        set((state) => {
+      toggleCategory: category => {
+        set(state => {
           const selected = state.gameState.selectedCategories;
           const newSelected = selected.includes(category)
-            ? selected.filter((c) => c !== category)
+            ? selected.filter(c => c !== category)
             : [...selected, category];
 
           return {
@@ -110,10 +110,10 @@ export const useGameStore = create<GameStore>()(
         });
       },
 
-      addCustomCategory: (category) => {
+      addCustomCategory: category => {
         if (!category.trim()) return;
 
-        set((state) => {
+        set(state => {
           const newCustomCategories = [...state.customCategories];
           if (!newCustomCategories.includes(category)) {
             newCustomCategories.push(category);
@@ -133,13 +133,13 @@ export const useGameStore = create<GameStore>()(
         });
       },
 
-      removeCustomCategory: (category) => {
-        set((state) => {
+      removeCustomCategory: category => {
+        set(state => {
           const newCustomCategories = state.customCategories.filter(
-            (c) => c !== category
+            c => c !== category,
           );
           const newSelectedCategories =
-            state.gameState.selectedCategories.filter((c) => c !== category);
+            state.gameState.selectedCategories.filter(c => c !== category);
 
           return {
             customCategories: newCustomCategories,
@@ -151,14 +151,14 @@ export const useGameStore = create<GameStore>()(
         });
       },
 
-      setCustomCategory: (category) => {
-        set((state) => ({
+      setCustomCategory: category => {
+        set(state => ({
           gameState: { ...state.gameState, customCategory: category },
         }));
       },
 
       toggleHints: () => {
-        set((state) => ({
+        set(state => ({
           gameState: {
             ...state.gameState,
             showHintsToImpostors: !state.gameState.showHintsToImpostors,
@@ -166,8 +166,8 @@ export const useGameStore = create<GameStore>()(
         }));
       },
 
-      setPhase: (phase) => {
-        set((state) => ({
+      setPhase: phase => {
+        set(state => ({
           gameState: { ...state.gameState, phase },
         }));
       },
@@ -186,12 +186,12 @@ export const useGameStore = create<GameStore>()(
             id: i + 1,
             name: playerNames[i] || `${t("player")} ${i + 1}`,
             role: "player",
-          })
+          }),
         );
 
         const shuffledIndexes = Array.from(
           { length: gameState.totalPlayers },
-          (_, i) => i
+          (_, i) => i,
         ).sort(() => Math.random() - 0.5);
 
         for (let i = 0; i < gameState.impostorCount; i++) {
@@ -204,15 +204,15 @@ export const useGameStore = create<GameStore>()(
           ];
         const wordWithHints = await getRandomWordWithHints(
           randomCategory,
-          gameState.language
+          gameState.language,
         );
 
         console.log(
           `Starting game with category: ${randomCategory}, word: ${
             wordWithHints.word
-          }, hints: ${wordWithHints.hints.join(", ")}`
+          }, hints: ${wordWithHints.hints.join(", ")}`,
         );
-        set((state) => ({
+        set(state => ({
           gameState: {
             ...state.gameState,
             phase: "wordreveal",
@@ -227,7 +227,7 @@ export const useGameStore = create<GameStore>()(
       },
 
       nextRevealPlayer: () => {
-        set((state) => {
+        set(state => {
           const nextIndex = state.gameState.currentRevealIndex + 1;
           return {
             gameState: {
@@ -239,19 +239,19 @@ export const useGameStore = create<GameStore>()(
       },
 
       startDiscussion: () => {
-        set((state) => ({
+        set(state => ({
           gameState: { ...state.gameState, phase: "discussion" },
         }));
       },
 
       endGame: () => {
-        set((state) => ({
+        set(state => ({
           gameState: { ...state.gameState, phase: "results" },
         }));
       },
 
       newGame: () => {
-        set((state) => ({
+        set(state => ({
           gameState: {
             ...state.gameState,
             phase: "setup",
@@ -267,7 +267,7 @@ export const useGameStore = create<GameStore>()(
     }),
     {
       name: "party-game-storage",
-      partialize: (state) => ({
+      partialize: state => ({
         customCategories: state.customCategories,
         playerNames: state.playerNames,
         gameState: {
@@ -278,9 +278,9 @@ export const useGameStore = create<GameStore>()(
           showHintsToImpostors: state.gameState.showHintsToImpostors,
         },
       }),
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => state => {
         state?.setHasHydrated(true);
       },
-    }
-  )
+    },
+  ),
 );

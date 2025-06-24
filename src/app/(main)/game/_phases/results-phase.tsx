@@ -7,17 +7,17 @@ import { useTranslations } from "next-intl";
 export function ResultsPhase() {
   const { gameState, newGame } = useGameStore();
   const t = useTranslations("ResultsPhase");
-  const impostors = gameState.players.filter((p) => p.role === "impostor");
+  const impostors = gameState.players.filter(p => p.role === "impostor");
 
   return (
-    <div className="h-dvh bg-black text-white flex items-center justify-center p-6">
-      <div className="w-md mx-auto text-center space-y-12">
+    <div className="flex h-dvh items-center justify-center bg-black p-6 text-white">
+      <div className="mx-auto w-md space-y-12 text-center">
         <div className="space-y-3">
           <h1 className="text-4xl font-bold">{t("results")}</h1>
         </div>
 
         <div className="space-y-3">
-          <p className="text-zinc-500 uppercase tracking-wider">
+          <p className="tracking-wider text-zinc-500 uppercase">
             {t("theWordWas")}
           </p>
           <p className="text-3xl font-light text-blue-400">
@@ -28,14 +28,14 @@ export function ResultsPhase() {
         <Separator className="bg-zinc-800" />
 
         <div className="space-y-4">
-          <p className="text-zinc-500 uppercase tracking-wider">
+          <p className="tracking-wider text-zinc-500 uppercase">
             {impostors.length === 1 ? "Impostor" : "Impostors"}
           </p>
           <div className="space-y-3">
-            {impostors.map((impostor) => (
+            {impostors.map(impostor => (
               <div
                 key={impostor.id}
-                className="bg-red-600/10 border border-red-600/20 rounded-xl p-4"
+                className="rounded-xl border border-red-600/20 bg-red-600/10 p-4"
               >
                 <p className="text-xl font-light text-red-400">
                   {impostor.name}
@@ -49,9 +49,9 @@ export function ResultsPhase() {
 
         <Button
           onClick={newGame}
-          className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 py-6 px-8 rounded-2xl text-lg font-light transition-all duration-200 backdrop-blur-sm"
+          className="w-full rounded-2xl border border-white/20 bg-white/10 px-8 py-6 text-lg font-light text-white backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/20"
         >
-          <RotateCcw className="w-5 h-5 mr-3" />
+          <RotateCcw className="mr-3 h-5 w-5" />
           {t("newGame")}
         </Button>
       </div>

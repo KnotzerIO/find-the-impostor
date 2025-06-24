@@ -1,3 +1,4 @@
+import { IconBox } from "../_components/icon-box";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -19,10 +20,9 @@ import { Separator } from "@/src/components/ui/separator";
 import { useGameStore } from "@/src/stores/game-store";
 import { Locale } from "@/src/types/game";
 import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
-import { useState } from "react";
-import { IconBox } from "../_components/icon-box";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SetupPhase() {
   const {
@@ -85,7 +85,7 @@ export default function SetupPhase() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-black p-6 text-white">
       <Button
         onClick={() => router.push("/")}
         variant="ghost"
@@ -94,10 +94,10 @@ export default function SetupPhase() {
       >
         <ArrowLeft className="size-6" />
       </Button>
-      <div className="max-w-2xl mx-auto space-y-8">
-        <div className="text-center space-y-2">
+      <div className="mx-auto max-w-2xl space-y-8">
+        <div className="space-y-2 text-center">
           <h1 className="text-4xl font-bold">{t("gameSetup")}</h1>
-          <p className="text-zinc-400 text-sm">{t("configureSettings")}</p>
+          <p className="text-sm text-zinc-400">{t("configureSettings")}</p>
         </div>
 
         <Card>
@@ -114,13 +114,13 @@ export default function SetupPhase() {
               </Label>
               <Select
                 value={gameState.totalPlayers.toString()}
-                onValueChange={(value) => setPlayerCount(Number(value), t)}
+                onValueChange={value => setPlayerCount(Number(value), t)}
               >
-                <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white">
+                <SelectTrigger className="border-zinc-700 bg-zinc-800/50 text-white">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-700">
-                  {Array.from({ length: 8 }, (_, i) => i + 3).map((num) => (
+                <SelectContent className="border-zinc-700 bg-zinc-900">
+                  {Array.from({ length: 8 }, (_, i) => i + 3).map(num => (
                     <SelectItem
                       key={num}
                       value={num.toString()}
@@ -137,15 +137,15 @@ export default function SetupPhase() {
               <Label className="text-sm font-medium text-zinc-300">
                 {t("playerNames")}
               </Label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {Array.from({ length: gameState.totalPlayers }, (_, i) => (
                   <Input
                     key={`player-${gameState.totalPlayers}-${i}`}
                     placeholder={`${t("player")} ${i + 1}`}
                     value={playerNames[i] || ""}
-                    onChange={(e) => setPlayerName(i, e.target.value)}
-                    onFocus={(e) => e.target.select()}
-                    className="bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-blue-400 transition-colors"
+                    onChange={e => setPlayerName(i, e.target.value)}
+                    onFocus={e => e.target.select()}
+                    className="border-zinc-700 bg-zinc-800/50 text-white transition-colors placeholder:text-zinc-500 focus:border-blue-400"
                   />
                 ))}
               </div>
@@ -162,23 +162,23 @@ export default function SetupPhase() {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-3">
                 <Label className="text-sm font-medium text-zinc-300">
                   🎭 Impostors
                 </Label>
                 <Select
                   value={gameState.impostorCount.toString()}
-                  onValueChange={(value) => setImpostorCount(Number(value))}
+                  onValueChange={value => setImpostorCount(Number(value))}
                 >
-                  <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white">
+                  <SelectTrigger className="border-zinc-700 bg-zinc-800/50 text-white">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-zinc-900 border-zinc-700">
+                  <SelectContent className="border-zinc-700 bg-zinc-900">
                     {Array.from(
                       { length: gameState.totalPlayers - 1 },
-                      (_, i) => i + 1
-                    ).map((num) => (
+                      (_, i) => i + 1,
+                    ).map(num => (
                       <SelectItem
                         key={num}
                         value={num.toString()}
@@ -192,18 +192,18 @@ export default function SetupPhase() {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-sm font-medium text-zinc-300 flex items-center">
+                <Label className="flex items-center text-sm font-medium text-zinc-300">
                   🌐 {t("language")}
                 </Label>
                 <Select
                   value={gameState.language}
                   onValueChange={handleLanguageChange}
                 >
-                  <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white">
+                  <SelectTrigger className="border-zinc-700 bg-zinc-800/50 text-white">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-zinc-900 border-zinc-700">
-                    {languages.map((lang) => (
+                  <SelectContent className="border-zinc-700 bg-zinc-900">
+                    {languages.map(lang => (
                       <SelectItem
                         key={lang.value}
                         value={lang.value}
@@ -221,17 +221,17 @@ export default function SetupPhase() {
 
             <Separator className="bg-zinc-700" />
 
-            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-800/30">
+            <div className="flex items-center justify-between rounded-lg bg-zinc-800/30 p-3">
               <div className="flex items-center space-x-3">
                 <Checkbox
                   id="hints"
                   checked={gameState.showHintsToImpostors}
                   onCheckedChange={toggleHints}
-                  className="border-zinc-600 data-[state=checked]:bg-blue-500 data-[state=checked]:border-purple-500"
+                  className="border-zinc-600 data-[state=checked]:border-purple-500 data-[state=checked]:bg-blue-500"
                 />
                 <Label
                   htmlFor="hints"
-                  className="text-sm font-medium text-zinc-300 cursor-pointer"
+                  className="cursor-pointer text-sm font-medium text-zinc-300"
                 >
                   {t("showHints")}
                 </Label>
@@ -247,26 +247,26 @@ export default function SetupPhase() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {allCategories.map((category) => {
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {allCategories.map(category => {
                 const isCustomCategory = customCategories.includes(category);
 
                 return (
                   <div
                     key={category}
-                    className="flex items-center justify-between p-3 rounded-lg bg-zinc-800/30 hover:bg-zinc-800/50 transition-colors group"
+                    className="group flex items-center justify-between rounded-lg bg-zinc-800/30 p-3 transition-colors hover:bg-zinc-800/50"
                   >
                     <div
-                      className="flex items-center space-x-3 flex-1 cursor-pointer"
+                      className="flex flex-1 cursor-pointer items-center space-x-3"
                       onClick={() => toggleCategory(category)}
                     >
                       <Checkbox
                         checked={gameState.selectedCategories.includes(
-                          category
+                          category,
                         )}
-                        className="border-zinc-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
+                        className="border-zinc-600 data-[state=checked]:border-green-500 data-[state=checked]:bg-green-500"
                       />
-                      <Label className="text-sm font-medium text-zinc-300 capitalize cursor-pointer">
+                      <Label className="cursor-pointer text-sm font-medium text-zinc-300 capitalize">
                         {categoryTranslations[
                           category as keyof typeof categoryTranslations
                         ] || `🏷️ ${category}`}
@@ -275,15 +275,15 @@ export default function SetupPhase() {
 
                     {isCustomCategory && (
                       <Button
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           removeCustomCategory(category);
                         }}
                         variant="ghost"
                         size="icon"
-                        className="text-red-400 hover:text-red-300 p-1 h-auto"
+                        className="h-auto p-1 text-red-400 hover:text-red-300"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="h-4 w-4" />
                       </Button>
                     )}
                   </div>
@@ -301,26 +301,26 @@ export default function SetupPhase() {
                 <Input
                   placeholder={t("customCategoryPlaceholder")}
                   value={gameState.customCategory || ""}
-                  onChange={(e) => setCustomCategory(e.target.value)}
-                  onKeyDown={(e) =>
+                  onChange={e => setCustomCategory(e.target.value)}
+                  onKeyDown={e =>
                     e.key === "Enter" && handleAddCustomCategory()
                   }
-                  className="flex-1 bg-zinc-800/50 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-green-400 transition-colors"
+                  className="flex-1 border-zinc-700 bg-zinc-800/50 text-white transition-colors placeholder:text-zinc-500 focus:border-green-400"
                 />
                 <Button
                   onClick={handleAddCustomCategory}
                   variant="outline"
                   size="icon"
-                  className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-700 text-white"
+                  className="border-zinc-700 bg-zinc-800/50 text-white hover:bg-zinc-700"
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
             {gameState.selectedCategories.length === 0 && (
-              <div className="p-3 rounded-lg bg-red-950/20 border border-red-900/30">
-                <p className="text-red-400 text-sm">{t("selectCategory")}</p>
+              <div className="rounded-lg border border-red-900/30 bg-red-950/20 p-3">
+                <p className="text-sm text-red-400">{t("selectCategory")}</p>
               </div>
             )}
           </CardContent>
@@ -329,7 +329,7 @@ export default function SetupPhase() {
         <Button
           onClick={handleStartGame}
           disabled={isStarting || gameState.selectedCategories.length === 0}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-medium rounded-xl transition-all duration-200 disabled:bg-zinc-700 disabled:cursor-not-allowed"
+          className="w-full rounded-xl bg-blue-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-zinc-700"
         >
           {isStarting ? t("generateWords") : t("startGame")}
         </Button>

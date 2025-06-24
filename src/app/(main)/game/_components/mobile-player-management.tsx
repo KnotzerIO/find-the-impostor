@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
-import { ArrowLeft, Users, Plus, X, Edit3, Check } from "lucide-react";
 import { GameState, TranslationFunction } from "@/src/types/game";
+import { ArrowLeft, Users, Plus, X, Edit3, Check } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface MobilePlayerManagementProps {
   onBack: () => void;
@@ -87,20 +87,20 @@ export default function MobilePlayerManagement({
       >
         <ArrowLeft className="size-6" />
       </Button>
-      <div className="container mx-auto px-4 py-6 space-y-8">
-        <div className="text-center space-y-2">
+      <div className="container mx-auto space-y-8 px-4 py-6">
+        <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold text-white">{t("players")}</h1>
         </div>
 
         <div className="space-y-6">
-          <Card className="p-0 rounded-3xl">
+          <Card className="rounded-3xl p-0">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                  <Users className="w-5 h-5 text-white" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
+                  <Users className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-lg">
+                  <h3 className="text-lg font-semibold text-white">
                     {localPlayers.length} {t("players")}
                   </h3>
                 </div>
@@ -111,18 +111,18 @@ export default function MobilePlayerManagement({
           <div className="space-y-3">
             {localPlayers.map((player, index) => (
               <div key={index} className="w-full">
-                <Card className="p-0 rounded-3xl">
+                <Card className="rounded-3xl p-0">
                   <CardContent className="p-4">
                     {editingIndex === index ? (
                       <div className="flex items-center gap-3">
                         <Input
                           value={editingName}
-                          onChange={(e) => setEditingName(e.target.value)}
-                          onKeyDown={(e) => {
+                          onChange={e => setEditingName(e.target.value)}
+                          onKeyDown={e => {
                             if (e.key === "Enter") saveEdit();
                             if (e.key === "Escape") cancelEdit();
                           }}
-                          className="flex-1 h-10 bg-transparent text-white ocus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                          className="ocus-visible:outline-none h-10 flex-1 bg-transparent text-white focus-visible:ring-2 focus-visible:ring-blue-500"
                           autoFocus
                         />
                         <div className="flex items-center gap-2">
@@ -130,24 +130,24 @@ export default function MobilePlayerManagement({
                             variant="ghost"
                             size="icon"
                             onClick={saveEdit}
-                            className="size-8 text-green-400 hover:bg-green-500/10 rounded-xl"
+                            className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
                           >
-                            <Check className="w-3 h-3" />
+                            <Check className="h-3 w-3" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={cancelEdit}
-                            className="size-8 text-gray-400 hover:bg-gray-500/10 rounded-xl"
+                            className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
                           >
-                            <X className="w-3 h-3" />
+                            <X className="h-3 w-3" />
                           </Button>
                         </div>
                       </div>
                     ) : (
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                          <div className="h-2 w-2 rounded-full bg-blue-400"></div>
 
                           <span className="font-medium text-white">
                             {player}
@@ -158,18 +158,18 @@ export default function MobilePlayerManagement({
                             variant="ghost"
                             size="icon"
                             onClick={() => startEditing(index)}
-                            className="h-8 w-8 text-blue-400 hover:bg-blue-500/10 rounded-lg"
+                            className="h-8 w-8 rounded-lg text-blue-400 hover:bg-blue-500/10"
                           >
-                            <Edit3 className="w-3 h-3" />
+                            <Edit3 className="h-3 w-3" />
                           </Button>
                           {index >= 3 && (
                             <Button
                               variant="ghost"
                               size="icon"
                               onClick={() => removePlayer(index)}
-                              className="h-8 w-8 text-red-400 hover:bg-red-500/10 rounded-lg"
+                              className="h-8 w-8 rounded-lg text-red-400 hover:bg-red-500/10"
                             >
-                              <X className="w-3 h-3" />
+                              <X className="h-3 w-3" />
                             </Button>
                           )}
                         </div>
@@ -184,21 +184,21 @@ export default function MobilePlayerManagement({
           <div>
             {showAddInput ? (
               <div>
-                <Card className="p-0 rounded-3xl">
+                <Card className="rounded-3xl p-0">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between gap-1">
                       <Input
                         placeholder={t("player")}
                         value={newPlayerName}
-                        onChange={(e) => setNewPlayerName(e.target.value)}
-                        onKeyDown={(e) => {
+                        onChange={e => setNewPlayerName(e.target.value)}
+                        onKeyDown={e => {
                           if (e.key === "Enter") addPlayer();
                           if (e.key === "Escape") {
                             setShowAddInput(false);
                             setNewPlayerName("");
                           }
                         }}
-                        className="flex-1 h-10 bg-transparent text-white ocus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                        className="ocus-visible:outline-none h-10 flex-1 bg-transparent text-white focus-visible:ring-2 focus-visible:ring-blue-500"
                         autoFocus
                       />
                       <div className="flex items-center gap-2">
@@ -209,9 +209,9 @@ export default function MobilePlayerManagement({
                           disabled={
                             !newPlayerName.trim() || localPlayers.length >= 10
                           }
-                          className="size-8 text-green-400 hover:bg-green-500/10 rounded-xl"
+                          className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
                         >
-                          <Check className="w-3 h-3" />
+                          <Check className="h-3 w-3" />
                         </Button>
                         <Button
                           variant="ghost"
@@ -220,9 +220,9 @@ export default function MobilePlayerManagement({
                             setShowAddInput(false);
                             setNewPlayerName("");
                           }}
-                          className="size-8 text-gray-400 hover:bg-gray-500/10 rounded-xl"
+                          className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
                         >
-                          <X className="w-3 h-3" />
+                          <X className="h-3 w-3" />
                         </Button>
                       </div>
                     </div>
@@ -233,9 +233,9 @@ export default function MobilePlayerManagement({
               <Button
                 onClick={() => setShowAddInput(true)}
                 disabled={localPlayers.length >= 10}
-                className="w-full h-14 text-lg font-semibold bg-white text-black hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
+                className="h-14 w-full bg-white text-lg font-semibold text-black hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
               >
-                <Plus className="w-5 h-5 mr-3" />
+                <Plus className="mr-3 h-5 w-5" />
                 {t("addPlayer") || "Add Player"}
               </Button>
             )}
