@@ -97,13 +97,13 @@ export class PromptEngine {
   };
 
   static createPrompt(config: PromptConfig): string {
-    const langConfig = this.LANGUAGE_CONFIGS[config.language];
+    const langConfig = PromptEngine.LANGUAGE_CONFIGS[config.language];
     const difficultyMod =
-      this.DIFFICULTY_MODIFIERS[config.difficulty || "medium"];
+      PromptEngine.DIFFICULTY_MODIFIERS[config.difficulty || "medium"];
     const categoryContext =
-      this.CATEGORY_CONTEXTS[
-        config.category.toLowerCase() as keyof typeof this.CATEGORY_CONTEXTS
-      ];
+      PromptEngine.CATEGORY_CONTEXTS[
+        config.category.toLowerCase() as keyof typeof PromptEngine.CATEGORY_CONTEXTS
+      ] || null;
 
     const example =
       langConfig.examples[
