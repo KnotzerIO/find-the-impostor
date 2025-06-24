@@ -1,3 +1,5 @@
+import { WordWithHints } from "@/types/game";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface OpenRouterConfig {
   apiKey: string;
@@ -18,7 +20,7 @@ export class OpenAIService {
     prompt: string,
     schema: any,
     retryCount = 0
-  ): Promise<any> {
+  ): Promise<{ wordsWithHints: WordWithHints[] }> {
     const maxRetries = this.config.fallbackModel ? 1 : 0;
     const currentModel =
       retryCount === 0 ? this.config.model : this.config.fallbackModel!;
@@ -70,8 +72,11 @@ export class OpenAIService {
       if (!data.choices?.[0]?.message?.content) {
         throw new Error("Invalid response structure from OpenRouter");
       }
-
-      return JSON.parse(data.choices[0].message.content);
+      try {
+        return JSON.parse(data.choices[0].message.content);
+      } catch (parseError) {
+        throw new Error(`Failed to parse JSON response: ${parseError}`);
+      }
     } catch (error) {
       console.error(`OpenRouter error with ${currentModel}:`, error);
 
@@ -134,9 +139,16 @@ Always respond with valid JSON matching the requested schema. No additional text
     recentRequests.push(now);
     this.requestQueue.set(ip, recentRequests);
 
-    // Cleanup old entries periodically
-    if (Math.random() < 0.01) {
-      // 1% chance to cleanup
+    // Cleanup old entries every 100 requests
+    if (
+      this.requestQueue.size > 0 &&
+      Array.from(this.requestQueue.values()).reduce(
+        (sum, reqs) => sum + reqs.length,
+        0
+      ) %
+        100 ===
+        0
+    ) {
       this.cleanupRateLimit(windowMs);
     }
 
@@ -167,9 +179,19 @@ Always respond with valid JSON matching the requested schema. No additional text
   }
 }
 
+if (
+  !process.env.OPENAI_API_KEY ||
+  !process.env.OPENAI_API_BASE ||
+  !process.env.LLM_MODEL
+) {
+  throw new Error(
+    "Missing required environment variables: OPENAI_API_KEY and OPENAI_API_BASE and LLM_MODEL"
+  );
+}
+
 export const openAIService = new OpenAIService({
-  apiKey: process.env.OPENAI_API_KEY!,
-  baseUrl: process.env.OPENAI_API_BASE!,
-  model: process.env.LLM_MODEL || "meta-llama/llama-4-maverick:free",
-  fallbackModel: process.env.LLM_FALLBACK_MODEL || "deepseek/deepseek-r1:free ",
+  apiKey: process.env.OPENAI_API_KEY,
+  baseUrl: process.env.OPENAI_API_BASE,
+  model: process.env.LLM_MODEL,
+  fallbackModel: process.env.LLM_FALLBACK_MODEL,
 });
