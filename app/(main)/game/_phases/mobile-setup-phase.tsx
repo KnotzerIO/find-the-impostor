@@ -63,7 +63,9 @@ export default function MobileSetupPhase() {
   const getCategoryDisplayText = () => {
     if (gameState.selectedCategories.length === 1) {
       const category = gameState.selectedCategories[0];
-      return t(category, { fallback: category });
+      return customCategories.includes(category)
+        ? category
+        : t(category, { fallback: category });
     }
     return `${gameState.selectedCategories.length} ${t("selected")}`;
   };
