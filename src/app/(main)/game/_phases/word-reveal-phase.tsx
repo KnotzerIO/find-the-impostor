@@ -68,14 +68,15 @@ export default function WordRevealPhase() {
             <h1 className="text-3xl font-bold">{t("allCardsRevealed")}</h1>
             <p className="text-zinc-400">{t("everyPlayerSeen")}</p>
           </div>
-
-          <Button
-            onClick={startDiscussion}
-            className="w-full rounded-xl bg-green-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-green-700"
-          >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            {t("startDiscussion")}
-          </Button>
+          <div className="mb-6">
+            <Button
+              onClick={startDiscussion}
+              className="w-full rounded-xl bg-green-600 py-6 text-lg font-medium text-white transition-all duration-200 hover:bg-green-700"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              {t("startDiscussion")}
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -143,11 +144,7 @@ export default function WordRevealPhase() {
     <div className="flex h-dvh items-center justify-center bg-black p-6 text-white">
       <div className="mx-auto max-w-md space-y-8">
         <div className="space-y-2 text-center">
-          <h2 className="text-2xl font-bold">{selectedPlayer.name}</h2>
-          <Badge variant="outline" className="border-zinc-600 text-zinc-300">
-            {t("player")} {selectedCardIndex + 1} {t("of")}{" "}
-            {gameState.players.length}
-          </Badge>
+          <h2 className="text-3xl font-bold">{selectedPlayer.name}</h2>
         </div>
 
         <div className="relative">
@@ -216,7 +213,7 @@ export default function WordRevealPhase() {
           </Card>
         </div>
 
-        <div className="space-y-3">
+        <div className="mb-6">
           {!isCardFlipped ? (
             <Button
               onClick={handleCardFlip}
