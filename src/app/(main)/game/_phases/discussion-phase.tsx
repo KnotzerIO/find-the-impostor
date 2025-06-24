@@ -1,14 +1,20 @@
 import { Button } from "@/src/components/ui/button";
+import { useSound } from "@/src/hooks/use-sound";
 import { useGameStore } from "@/src/stores/game-store";
 import { Eye, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 export default function DiscussionPhase() {
   const { gameState, endGame } = useGameStore();
   const t = useTranslations("DiscussionPhase");
-
+  const playImpostorSound = useSound("/sounds/impostor-sound.mp3", 1);
   const startPlayerIndex = Math.floor(Math.random() * gameState.players.length);
   const startPlayer = gameState.players[startPlayerIndex];
+
+  useEffect(() => {
+    playImpostorSound();
+  }, [playImpostorSound]);
 
   return (
     <div className="h-dvh flex justify-center items-center p-6">
