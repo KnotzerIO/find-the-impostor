@@ -122,6 +122,7 @@ export default function MobilePlayerManagement({
                             if (e.key === "Enter") saveEdit();
                             if (e.key === "Escape") cancelEdit();
                           }}
+                          onBlur={saveEdit}
                           className="ocus-visible:outline-none h-10 flex-1 bg-transparent text-white focus-visible:ring-2 focus-visible:ring-blue-500"
                           autoFocus
                         />
