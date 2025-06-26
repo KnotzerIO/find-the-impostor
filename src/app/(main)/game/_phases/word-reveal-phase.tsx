@@ -152,6 +152,7 @@ export default function WordRevealPhase() {
             className={`min-w-xs transform border-zinc-700 bg-zinc-900/70 backdrop-blur-sm transition-all duration-500 ${
               isCardFlipped ? "scale-105" : ""
             }`}
+            onClick={handleCardFlip}
           >
             <CardContent className="w-full p-8">
               <div className="flex flex-col items-center justify-center space-y-6">

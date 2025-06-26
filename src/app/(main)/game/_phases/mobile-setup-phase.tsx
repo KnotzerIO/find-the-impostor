@@ -224,7 +224,13 @@ export default function MobileSetupPhase() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500">
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
+                      gameState.showHintsToImpostors
+                        ? "bg-green-500"
+                        : "bg-gray-500"
+                    }`}
+                  >
                     <Lightbulb className="h-6 w-6 text-white" />
                   </div>
                   <div>
