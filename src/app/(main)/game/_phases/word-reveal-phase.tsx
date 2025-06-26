@@ -37,6 +37,8 @@ export default function WordRevealPhase() {
   };
 
   const handleCardFlip = () => {
+    if (isCardFlipped) return;
+
     setIsCardFlipped(true);
 
     if (selectedPlayer?.role === "impostor" && gameState.showHintsToImpostors) {
