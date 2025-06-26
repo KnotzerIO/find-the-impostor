@@ -113,6 +113,11 @@ export default function MobileSetupPhase() {
 
   return (
     <div className="max-dvh h-dvh">
+      {/* Disable overlay blocks all user interactions while game is starting */}
+      {isStarting && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"></div>
+      )}
+
       <Button
         onClick={() => router.back()}
         variant="ghost"
