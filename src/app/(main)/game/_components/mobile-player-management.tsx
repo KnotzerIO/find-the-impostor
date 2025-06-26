@@ -145,9 +145,8 @@ export default function MobilePlayerManagement({
                         </div>
                       </div>
                     ) : (
-                      <Button
-                        variant="ghost"
-                        className="text-md flex size-full items-center justify-between px-4 py-5"
+                      <div
+                        className="flex items-center justify-between px-4 py-5"
                         onClick={() => startEditing(index)}
                       >
                         <div className="flex items-center gap-3">
@@ -158,8 +157,13 @@ export default function MobilePlayerManagement({
                           </span>
                         </div>
                         <div className="flex items-center gap-2 text-blue-400">
-                          <Edit3 className="size-4" />
-
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 rounded-lg text-blue-400 hover:bg-blue-500/10"
+                          >
+                            <Edit3 className="h-3 w-3" />
+                          </Button>
                           {index >= 3 && (
                             <Button
                               variant="ghost"
@@ -171,7 +175,7 @@ export default function MobilePlayerManagement({
                             </Button>
                           )}
                         </div>
-                      </Button>
+                      </div>
                     )}
                   </CardContent>
                 </Card>
