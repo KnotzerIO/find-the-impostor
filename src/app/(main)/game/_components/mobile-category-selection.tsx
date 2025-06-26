@@ -66,7 +66,7 @@ export default function MobileCategorySelection({
   };
 
   return (
-    <div className="min-h-dvh bg-black">
+    <div className="min-h-dvh">
       <Button
         variant="ghost"
         size="icon"

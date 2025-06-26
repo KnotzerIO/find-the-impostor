@@ -10,7 +10,7 @@ export function ResultsPhase() {
   const impostors = gameState.players.filter(p => p.role === "impostor");
 
   return (
-    <div className="flex h-dvh items-center justify-center bg-black p-6 text-white">
+    <div className="flex h-dvh items-center justify-center p-6 text-white">
       <div className="mx-auto w-md space-y-12 text-center">
         <div className="space-y-3">
           <h1 className="text-4xl font-bold">{t("results")}</h1>

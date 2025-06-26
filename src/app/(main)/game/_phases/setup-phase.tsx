@@ -85,7 +85,7 @@ export default function SetupPhase() {
   };
 
   return (
-    <div className="min-h-screen bg-black p-6 text-white">
+    <div className="min-h-screen p-6 text-white">
       <Button
         onClick={() => router.push("/")}
         variant="ghost"

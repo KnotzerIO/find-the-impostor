@@ -49,7 +49,7 @@ export default function MobileGameSettings({
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen">
       <div className="container mx-auto max-w-sm px-6 py-8">
         {/* Header */}
         <div className="mb-8 flex items-center gap-4">

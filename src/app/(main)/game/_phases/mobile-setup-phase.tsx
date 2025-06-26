@@ -112,7 +112,7 @@ export default function MobileSetupPhase() {
   }
 
   return (
-    <div className="max-dvh h-dvh bg-black">
+    <div className="max-dvh h-dvh">
       <Button
         onClick={() => router.back()}
         variant="ghost"

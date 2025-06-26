@@ -61,7 +61,7 @@ export default function WordRevealPhase() {
 
   if (allPlayersRevealed) {
     return (
-      <div className="flex h-dvh items-center justify-center overflow-hidden bg-black p-6 text-white">
+      <div className="flex h-dvh items-center justify-center overflow-hidden p-6 text-white">
         <div className="mx-auto max-w-md space-y-6 text-center">
           <div className="space-y-2">
             <Users className="mx-auto h-16 w-16 text-green-400" />
@@ -84,7 +84,7 @@ export default function WordRevealPhase() {
 
   if (selectedCardIndex === null) {
     return (
-      <div className="min-h-dvh bg-black p-6 text-white">
+      <div className="min-h-dvh p-6 text-white">
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">{t("chooseYourCard")}</h1>
@@ -141,7 +141,7 @@ export default function WordRevealPhase() {
   const isImpostor = selectedPlayer?.role === "impostor";
 
   return (
-    <div className="flex h-dvh items-center justify-center bg-black p-6 text-white">
+    <div className="flex h-dvh items-center justify-center p-6 text-white">
       <div className="mx-auto max-w-md space-y-8">
         <div className="space-y-2 text-center">
           <h2 className="text-3xl font-bold">{selectedPlayer.name}</h2>
