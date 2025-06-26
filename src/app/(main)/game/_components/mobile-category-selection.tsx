@@ -116,7 +116,7 @@ export default function MobileCategorySelection({
                             category.isCustom ? "bg-purple-500" : "bg-blue-500"
                           }`}
                         >
-                          <Check className="h-4 w-4 text-white" />
+                          <Check className="size-4 text-white" />
                         </div>
                       )}
                       {category.isCustom && (
@@ -129,7 +129,7 @@ export default function MobileCategorySelection({
                           }}
                           className="h-8 w-8 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300"
                         >
-                          <X className="h-4 w-4" />
+                          <X className="size-4" />
                         </Button>
                       )}
                     </div>
@@ -163,9 +163,9 @@ export default function MobileCategorySelection({
                         onClick={handleAddCustomCategory}
                         disabled={!gameState.customCategory}
                         size="icon"
-                        className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
+                        className="size-9 rounded-xl text-green-400 hover:bg-green-500/10"
                       >
-                        <Check className="h-3 w-3" />
+                        <Check className="size-4" />
                       </Button>
                       <Button
                         variant="ghost"
@@ -173,9 +173,9 @@ export default function MobileCategorySelection({
                         onClick={() => {
                           setShowAddCustom(false);
                         }}
-                        className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
+                        className="size-9 rounded-xl text-gray-400 hover:bg-gray-500/10"
                       >
-                        <X className="h-3 w-3" />
+                        <X className="size-4" />
                       </Button>
                     </div>
                   </div>

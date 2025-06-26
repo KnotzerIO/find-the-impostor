@@ -112,9 +112,9 @@ export default function MobilePlayerManagement({
             {localPlayers.map((player, index) => (
               <div key={index} className="w-full">
                 <Card className="rounded-3xl p-0">
-                  <CardContent className="p-4">
+                  <CardContent className="p-0">
                     {editingIndex === index ? (
-                      <div className="flex items-center gap-3">
+                      <div className="m-4 flex items-center gap-3">
                         <Input
                           value={editingName}
                           onChange={e => setEditingName(e.target.value)}
@@ -130,22 +130,26 @@ export default function MobilePlayerManagement({
                             variant="ghost"
                             size="icon"
                             onClick={saveEdit}
-                            className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
+                            className="size-9 rounded-xl text-green-400 hover:bg-green-500/10"
                           >
-                            <Check className="h-3 w-3" />
+                            <Check className="size-4" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={cancelEdit}
-                            className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
+                            className="size-9 rounded-xl text-gray-400 hover:bg-gray-500/10"
                           >
-                            <X className="h-3 w-3" />
+                            <X className="size-4" />
                           </Button>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-between">
+                      <Button
+                        variant="ghost"
+                        className="text-md flex size-full items-center justify-between px-4 py-5"
+                        onClick={() => startEditing(index)}
+                      >
                         <div className="flex items-center gap-3">
                           <div className="h-2 w-2 rounded-full bg-blue-400"></div>
 
@@ -153,15 +157,9 @@ export default function MobilePlayerManagement({
                             {player}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => startEditing(index)}
-                            className="h-8 w-8 rounded-lg text-blue-400 hover:bg-blue-500/10"
-                          >
-                            <Edit3 className="h-3 w-3" />
-                          </Button>
+                        <div className="flex items-center gap-2 text-blue-400">
+                          <Edit3 className="size-4" />
+
                           {index >= 3 && (
                             <Button
                               variant="ghost"
@@ -169,11 +167,11 @@ export default function MobilePlayerManagement({
                               onClick={() => removePlayer(index)}
                               className="h-8 w-8 rounded-lg text-red-400 hover:bg-red-500/10"
                             >
-                              <X className="h-3 w-3" />
+                              <X className="size-4" />
                             </Button>
                           )}
                         </div>
-                      </div>
+                      </Button>
                     )}
                   </CardContent>
                 </Card>
@@ -209,9 +207,9 @@ export default function MobilePlayerManagement({
                           disabled={
                             !newPlayerName.trim() || localPlayers.length >= 10
                           }
-                          className="size-8 rounded-xl text-green-400 hover:bg-green-500/10"
+                          className="size-9 rounded-xl text-green-400 hover:bg-green-500/10"
                         >
-                          <Check className="h-3 w-3" />
+                          <Check className="size-4" />
                         </Button>
                         <Button
                           variant="ghost"
@@ -220,9 +218,9 @@ export default function MobilePlayerManagement({
                             setShowAddInput(false);
                             setNewPlayerName("");
                           }}
-                          className="size-8 rounded-xl text-gray-400 hover:bg-gray-500/10"
+                          className="size-9 rounded-xl text-gray-400 hover:bg-gray-500/10"
                         >
-                          <X className="h-3 w-3" />
+                          <X className="size-4" />
                         </Button>
                       </div>
                     </div>
