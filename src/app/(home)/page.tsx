@@ -34,7 +34,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="pb-3 text-center text-sm text-gray-500">
+      <div className="pb-3 text-center text-sm text-gray-400">
         © {new Date().getFullYear()} Mark Knotzer
       </div>
     </div>
