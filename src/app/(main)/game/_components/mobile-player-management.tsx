@@ -130,6 +130,7 @@ export default function MobilePlayerManagement({
                           <Button
                             variant="ghost"
                             size="icon"
+                            onMouseDown={e => e.preventDefault()} // Prevents input blur on mousedown - ensures onClick executes before onBlur triggers saveEdit
                             onClick={saveEdit}
                             className="size-9 rounded-xl text-green-400 hover:bg-green-500/10"
                           >
@@ -138,6 +139,7 @@ export default function MobilePlayerManagement({
                           <Button
                             variant="ghost"
                             size="icon"
+                            onMouseDown={e => e.preventDefault()} // Prevents input blur on mousedown - ensures onClick executes before onBlur triggers saveEdit
                             onClick={cancelEdit}
                             className="size-9 rounded-xl text-gray-400 hover:bg-gray-500/10"
                           >
