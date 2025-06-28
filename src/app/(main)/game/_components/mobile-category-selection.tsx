@@ -154,6 +154,10 @@ export default function MobileCategorySelection({
                           setShowAddCustom(false);
                         }
                       }}
+                      onBlur={() => {
+                        handleAddCustomCategory();
+                        setShowAddCustom(false);
+                      }}
                       className="h-10 flex-1 bg-transparent text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                       autoFocus
                     />
