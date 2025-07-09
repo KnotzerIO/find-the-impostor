@@ -1,10 +1,12 @@
+import { getUserLocale } from "@/src/lib/locale";
+import { Locale } from "@/src/types/game";
 import { getRequestConfig } from "next-intl/server";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 
 const supportedLocales = ["en", "de"] as const;
 type SupportedLocale = (typeof supportedLocales)[number];
 
-async function getPreferredLocale(): Promise<"en" | "de"> {
+async function getPreferredLocale(): Promise<Locale> {
   try {
     const headersList = await headers();
     const acceptLanguage = headersList.get("accept-language");
@@ -36,12 +38,8 @@ async function getPreferredLocale(): Promise<"en" | "de"> {
 }
 
 export default getRequestConfig(async () => {
-  const cookieStore = await cookies();
-  let locale = cookieStore.get("locale")?.value as SupportedLocale;
+  const locale = (await getUserLocale()) || (await getPreferredLocale());
 
-  if (!locale || !supportedLocales.includes(locale)) {
-    locale = await getPreferredLocale();
-  }
   return {
     locale,
     messages: (await import(`./locales/${locale}.json`)).default,
