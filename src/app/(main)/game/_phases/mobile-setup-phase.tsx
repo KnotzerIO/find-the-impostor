@@ -1,8 +1,8 @@
 "use client";
 
 import MobileCategorySelection from "../_components/mobile-category-selection";
-import MobileGameSettings from "../_components/mobile-game-settings";
 import MobilePlayerManagement from "../_components/mobile-player-management";
+import SettingsModal from "../_components/settings-modal";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent } from "@/src/components/ui/card";
 import {
@@ -35,7 +35,6 @@ export default function MobileSetupPhase() {
     setPlayerCount,
     setPlayerName,
     setImpostorCount,
-    setLanguage,
     toggleCategory,
     addCustomCategory,
     removeCustomCategory,
@@ -45,7 +44,7 @@ export default function MobileSetupPhase() {
   } = useGameStore();
 
   const [currentScreen, setCurrentScreen] = useState<
-    "main" | "players" | "categories" | "settings"
+    "main" | "players" | "categories"
   >("main");
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
@@ -98,19 +97,6 @@ export default function MobileSetupPhase() {
     );
   }
 
-  if (currentScreen === "settings") {
-    return (
-      <MobileGameSettings
-        onBack={() => setCurrentScreen("main")}
-        gameState={gameState}
-        setImpostorCount={setImpostorCount}
-        setLanguage={setLanguage}
-        toggleHints={toggleHints}
-        t={t}
-      />
-    );
-  }
-
   return (
     <div className="max-dvh h-dvh">
       {/* Disable overlay blocks all user interactions while game is starting */}
@@ -126,6 +112,9 @@ export default function MobileSetupPhase() {
       >
         <ArrowLeft className="size-6" />
       </Button>
+
+      <SettingsModal />
+
       <div className="container mx-auto space-y-8 px-4 py-6">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold text-white">{t("gameSetup")}</h1>

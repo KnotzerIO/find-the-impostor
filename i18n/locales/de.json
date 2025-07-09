@@ -33,7 +33,12 @@
     "objects": "Gegenstände",
     "movies": "Filme",
     "places": "Orte",
-    "professions": "Berufe"
+    "professions": "Berufe",
+    "settings": "Einstellungen",
+    "difficulty": "Schwierigkeitsgrad",
+    "easy": "Einfach",
+    "medium": "Mittel",
+    "hard": "Schwer"
   },
   "WordRevealPhase": {
     "chooseYourCard": "Wähle deine Karte",

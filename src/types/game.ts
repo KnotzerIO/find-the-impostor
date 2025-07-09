@@ -1,4 +1,5 @@
 export type Locale = "en" | "de";
+export type Difficulty = "easy" | "medium" | "hard";
 
 export type TranslationFunction = (key: string) => string;
 
@@ -33,6 +34,7 @@ export interface GameState {
   selectedCategories: string[];
   customCategory: string;
   language: Locale;
+  difficulty: Difficulty;
   showHintsToImpostors: boolean;
   currentRevealIndex: number;
   gameStarted: boolean;

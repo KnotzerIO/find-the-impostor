@@ -1,5 +1,7 @@
+import { setUserLocale } from "../lib/locale";
 import { getRandomWordWithHints } from "@/src/lib/word-service";
 import type {
+  Difficulty,
   GameState,
   Locale,
   Player,
@@ -19,6 +21,7 @@ interface GameStore {
   setPlayerName: (index: number, name: string) => void;
   setImpostorCount: (count: number) => void;
   setLanguage: (language: Locale) => void;
+  setDifficulty: (difficulty: Difficulty) => void;
   toggleCategory: (category: string) => void;
   addCustomCategory: (category: string) => void;
   setCustomCategory: (category: string) => void;
@@ -44,9 +47,10 @@ export const useGameStore = create<GameStore>()(
         currentWord: "",
         currentHints: [],
         currentCategory: "",
-        selectedCategories: [],
+        selectedCategories: ["animals", "food", "movies"],
         customCategory: "",
         language: "de",
+        difficulty: "medium",
         showHintsToImpostors: true,
         currentRevealIndex: 0,
         gameStarted: false,
@@ -94,6 +98,13 @@ export const useGameStore = create<GameStore>()(
       setLanguage: language => {
         set(state => ({
           gameState: { ...state.gameState, language },
+        }));
+        setUserLocale(language);
+      },
+
+      setDifficulty: difficulty => {
+        set(state => ({
+          gameState: { ...state.gameState, difficulty },
         }));
       },
 
@@ -274,6 +285,7 @@ export const useGameStore = create<GameStore>()(
           totalPlayers: state.gameState.totalPlayers,
           impostorCount: state.gameState.impostorCount,
           language: state.gameState.language,
+          difficulty: state.gameState.difficulty,
           selectedCategories: state.gameState.selectedCategories,
           showHintsToImpostors: state.gameState.showHintsToImpostors,
         },

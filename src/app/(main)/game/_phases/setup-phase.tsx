@@ -18,7 +18,7 @@ import {
 } from "@/src/components/ui/select";
 import { Separator } from "@/src/components/ui/separator";
 import { useGameStore } from "@/src/stores/game-store";
-import { Locale } from "@/src/types/game";
+import { Difficulty, Locale } from "@/src/types/game";
 import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -39,6 +39,7 @@ export default function SetupPhase() {
     setCustomCategory,
     toggleHints,
     startGame,
+    setDifficulty,
   } = useGameStore();
 
   const [isStarting, setIsStarting] = useState(false);
@@ -63,13 +64,14 @@ export default function SetupPhase() {
     { value: "de", label: "Deutsch", flag: "🇦🇹" },
   ];
 
+  const difficulties = [
+    { value: "easy", label: t("easy") },
+    { value: "medium", label: t("medium") },
+    { value: "hard", label: t("hard") },
+  ];
+
   const handleLanguageChange = (language: string) => {
     setLanguage(language as Locale);
-
-    if (typeof window !== "undefined") {
-      document.cookie = `locale=${language}; path=/; max-age=31536000`; // 1 year
-      window.location.reload();
-    }
   };
 
   const handleStartGame = async () => {
@@ -162,7 +164,7 @@ export default function SetupPhase() {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="space-y-3">
                 <Label className="text-sm font-medium text-zinc-300">
                   🎭 Impostors
@@ -171,7 +173,7 @@ export default function SetupPhase() {
                   value={gameState.impostorCount.toString()}
                   onValueChange={value => setImpostorCount(Number(value))}
                 >
-                  <SelectTrigger className="border-zinc-700 bg-zinc-800/50 text-white">
+                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="border-zinc-700 bg-zinc-900">
@@ -199,7 +201,7 @@ export default function SetupPhase() {
                   value={gameState.language}
                   onValueChange={handleLanguageChange}
                 >
-                  <SelectTrigger className="border-zinc-700 bg-zinc-800/50 text-white">
+                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="border-zinc-700 bg-zinc-900">
@@ -211,6 +213,33 @@ export default function SetupPhase() {
                       >
                         <span className="flex items-center gap-2">
                           {lang.flag} {lang.label}
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="flex items-center text-sm font-medium text-zinc-300">
+                  ⚡ {t("difficulty")}
+                </Label>
+                <Select
+                  value={gameState.difficulty}
+                  onValueChange={value => setDifficulty(value as Difficulty)}
+                >
+                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="border-zinc-700 bg-zinc-900">
+                    {difficulties.map(difficulty => (
+                      <SelectItem
+                        key={difficulty.value}
+                        value={difficulty.value}
+                        className="text-white focus:bg-zinc-800"
+                      >
+                        <span className="flex items-center gap-2">
+                          {difficulty.label}
                         </span>
                       </SelectItem>
                     ))}

@@ -33,7 +33,12 @@
     "objects": "Objects",
     "movies": "Movies",
     "places": "Places",
-    "professions": "Professions"
+    "professions": "Professions",
+    "settings": "Settings",
+    "difficulty": "Difficulty",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
   },
   "WordRevealPhase": {
     "chooseYourCard": "Choose Your Card",
