@@ -278,6 +278,20 @@ export const useGameStore = create<GameStore>()(
     }),
     {
       name: "party-game-storage",
+      version: 1,
+      migrate: (persistedState: unknown, version: number) => {
+        const state = persistedState as Partial<GameStore>;
+        if (version === 0) {
+          return {
+            ...state,
+            gameState: {
+              ...state.gameState,
+              difficulty: "medium",
+            },
+          };
+        }
+        return state;
+      },
       partialize: state => ({
         customCategories: state.customCategories,
         playerNames: state.playerNames,
