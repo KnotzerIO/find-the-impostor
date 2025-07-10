@@ -216,6 +216,7 @@ export const useGameStore = create<GameStore>()(
         const wordWithHints = await getRandomWordWithHints(
           randomCategory,
           gameState.language,
+          gameState.difficulty,
         );
 
         console.log(

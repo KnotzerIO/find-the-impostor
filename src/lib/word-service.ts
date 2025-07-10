@@ -1,10 +1,11 @@
 import { db } from "./storage";
 import { FALLBACK_WORDS_WITH_HINTS } from "@/src/data/fallbackwords";
-import { Locale, WordWithHints } from "@/src/types/game";
+import { Difficulty, Locale, WordWithHints } from "@/src/types/game";
 
 export async function getRandomWordWithHints(
   category: string,
   language: Locale,
+  difficulty: Difficulty = "medium",
 ): Promise<WordWithHints> {
   try {
     const cached = await db.wordSets
@@ -36,7 +37,7 @@ export async function getRandomWordWithHints(
     const response = await fetch("/api/generate-words", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category, language, count: 15 }),
+      body: JSON.stringify({ category, language, count: 15, difficulty }),
     });
 
     if (response.ok) {
