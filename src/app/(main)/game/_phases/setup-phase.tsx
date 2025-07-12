@@ -17,10 +17,11 @@ import {
   SelectValue,
 } from "@/src/components/ui/select";
 import { Separator } from "@/src/components/ui/separator";
+import { setUserLocale } from "@/src/lib/locale";
 import { useGameStore } from "@/src/stores/game-store";
 import { Difficulty, Locale } from "@/src/types/game";
 import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -32,7 +33,6 @@ export default function SetupPhase() {
     setPlayerCount,
     setPlayerName,
     setImpostorCount,
-    setLanguage,
     toggleCategory,
     addCustomCategory,
     removeCustomCategory,
@@ -45,6 +45,7 @@ export default function SetupPhase() {
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
   const router = useRouter();
+  const locale = useLocale() as Locale;
   const categoryTranslations = {
     animals: `🐾 ${t("animals")}`,
     food: `🍕 ${t("food")}`,
@@ -70,13 +71,9 @@ export default function SetupPhase() {
     { value: "hard", label: t("hard") },
   ];
 
-  const handleLanguageChange = (language: string) => {
-    setLanguage(language as Locale);
-  };
-
   const handleStartGame = async () => {
     setIsStarting(true);
-    await startGame(t);
+    await startGame(t, locale);
     setIsStarting(false);
   };
 
@@ -198,8 +195,8 @@ export default function SetupPhase() {
                   🌐 {t("language")}
                 </Label>
                 <Select
-                  value={gameState.language}
-                  onValueChange={handleLanguageChange}
+                  value={locale}
+                  onValueChange={value => setUserLocale(value as Locale)}
                 >
                   <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
                     <SelectValue />

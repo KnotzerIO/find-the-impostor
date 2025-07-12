@@ -14,6 +14,7 @@ import {
 } from "@/src/components/ui/select";
 import { Switch } from "@/src/components/ui/switch";
 import { useGameStore } from "@/src/stores/game-store";
+import { Locale } from "@/src/types/game";
 import {
   ArrowLeft,
   ChevronRight,
@@ -23,7 +24,7 @@ import {
   Tag,
   Users,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -49,10 +50,11 @@ export default function MobileSetupPhase() {
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
   const router = useRouter();
+  const locale = useLocale() as Locale;
 
   const handleStartGame = async () => {
     setIsStarting(true);
-    await startGame(t);
+    await startGame(t, locale);
     setIsStarting(false);
   };
 

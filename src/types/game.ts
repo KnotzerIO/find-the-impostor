@@ -33,7 +33,6 @@ export interface GameState {
   currentCategory: string;
   selectedCategories: string[];
   customCategory: string;
-  language: Locale;
   difficulty: Difficulty;
   showHintsToImpostors: boolean;
   currentRevealIndex: number;

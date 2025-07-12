@@ -14,14 +14,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
+import { setUserLocale } from "@/src/lib/locale";
 import { useGameStore } from "@/src/stores/game-store";
 import { Difficulty, Locale } from "@/src/types/game";
 import { Settings } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function SettingsModal() {
-  const { gameState, setLanguage, setDifficulty } = useGameStore();
+  const { gameState, setDifficulty } = useGameStore();
   const t = useTranslations("SetupPhase");
+  const locale = useLocale() as Locale;
   const languages = [
     { value: "en", label: "English", flag: "🇺🇸" },
     { value: "de", label: "Deutsch", flag: "🇦🇹" },
@@ -52,8 +54,8 @@ export default function SettingsModal() {
             {t("language")}
           </Label>
           <Select
-            value={gameState.language}
-            onValueChange={value => setLanguage(value as Locale)}
+            value={locale}
+            onValueChange={value => setUserLocale(value as Locale)}
           >
             <SelectTrigger className="h-14 w-full rounded-2xl border-gray-700 bg-gray-800/50 px-3 py-2 text-white">
               <SelectValue />
