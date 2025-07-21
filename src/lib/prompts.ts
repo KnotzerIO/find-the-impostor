@@ -19,23 +19,23 @@ export class PromptEngine {
       examples: {
         animals: {
           word: "elephant",
-          hints: ["large", "grey", "African"],
+          hints: ["memory", "circus", "large"],
         },
         food: {
           word: "pizza",
-          hints: ["Italian", "round", "cheese"],
+          hints: ["delivery", "triangle", "teenage"],
         },
         objects: {
           word: "hammer",
-          hints: ["tool", "metal", "nails"],
+          hints: ["judge", "thunder", "construction"],
         },
         places: {
           word: "library",
-          hints: ["quiet", "book", "borrow"],
+          hints: ["silence", "overdue", "research"],
         },
         professions: {
           word: "chef",
-          hints: ["cut", "white", "Tv show"],
+          hints: ["temperature", "creativity", "white"],
         },
       },
     },
@@ -46,23 +46,23 @@ export class PromptEngine {
       examples: {
         animals: {
           word: "Elefant",
-          hints: ["Säugetier", "Grau", "Afrika"],
+          hints: ["Gedächtnis", "Zirkus", "Groß"],
         },
         food: {
           word: "Pizza",
-          hints: ["italienisch", "rund", "käse"],
+          hints: ["Lieferung", "Dreieck", "Jugendlicher"],
         },
         objects: {
           word: "Hammer",
-          hints: ["Werkzeug", "Metall", "Nägel"],
+          hints: ["Richter", "Donner", "Bauen"],
         },
         places: {
           word: "Bibliothek",
-          hints: ["ruhig", "bücher", "ausleihen"],
+          hints: ["Stille", "Überfällig", "Forschung"],
         },
         professions: {
           word: "Koch",
-          hints: ["schneiden", "weiß", "Fernsehshow"],
+          hints: ["Temperatur", "Kreativität", "Weiß"],
         },
       },
     },
@@ -128,18 +128,30 @@ CULTURAL CONSIDERATION: ${langConfig.culturalNote}
 WORD SELECTION CRITERIA:
 - Words must be nouns (things, not actions or descriptions)
 - Avoid abbreviations, acronyms, or technical jargon
-- No offensive or inappropriate content
 - Ensure words are spell-able and pronounceable
 - Mix different subcategories within the main category
+- Include a variety of word lengths and complexities
+- Ensure words are culturally relevant to the specified language
+- Avoid overly obscure or niche terms
 
 HINT CRAFTING RULES:
-1. First hint: Broad category or primary function
-2. Second hint: Key characteristic or common association  
-3. Third hint: Distinctive feature or specific context
-4. Each hint should be 1-4 words maximum
-5. Progressive difficulty: general → specific → distinctive
-6. Avoid rhymes, wordplay, or linguistic tricks
-7. No synonyms or direct translations of the target word
+1. Each hint should be 1 word maximum
+2. Hints should be indirect associations, not direct descriptors
+3. Use broad categories, feelings, or abstract connections
+4. Avoid physical descriptions (color, size, shape)
+5. Avoid location-specific or functional hints
+6. No synonyms, rhymes, or wordplay
+7. Think of distant but logical connections
+
+HINT STRATEGY:
+- Use emotional or conceptual associations rather than literal descriptions
+- Reference broader categories or themes
+- Use contextual clues from completely different domains
+- Aim for "aha!" moments rather than obvious connections
+- Each hint should feel like a puzzle piece, not a direct clue
+- Include playful, unexpected, or mildly humorous associations
+- Think of pop culture references, internet culture, or amusing situations
+- Use ironic or contrasting concepts that create surprise
 
 QUALITY ASSURANCE:
 - Each word must have exactly 3 hints
