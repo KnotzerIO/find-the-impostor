@@ -4,30 +4,6 @@ import { PromptEngine } from "@/src/lib/prompts";
 import { Locale } from "@/src/types/game";
 import { NextRequest, NextResponse } from "next/server";
 
-interface RateLimitTier {
-  windowMs: number;
-  maxRequests: number;
-  description: string;
-}
-
-const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
-  default: {
-    windowMs: 60 * 1000, // 1 minute
-    maxRequests: 2, // 2 requests per minute
-    description: "Standard rate limit",
-  },
-  burst: {
-    windowMs: 10 * 1000, // 10 seconds
-    maxRequests: 1, // Max 1 requests in 10 seconds
-    description: "Burst protection",
-  },
-  hourly: {
-    windowMs: 60 * 60 * 1000, // 1 hour
-    maxRequests: 10, // 10 requests per hour
-    description: "Hourly limit",
-  },
-};
-
 function getClientIP(request: NextRequest): string {
   const forwarded = request.headers.get("x-forwarded-for");
   const realIP = request.headers.get("x-real-ip");
@@ -89,37 +65,6 @@ export async function POST(request: NextRequest) {
   const clientIP = getClientIP(request);
 
   try {
-    // Multi-tier rate limiting
-    //! NOTE: Implement Redis or similar for distributed rate limiting
-    for (const [tierName, tier] of Object.entries(RATE_LIMIT_TIERS)) {
-      if (
-        !openAIService.checkRateLimit(
-          `${clientIP}:${tierName}`,
-          tier.windowMs,
-          tier.maxRequests,
-        )
-      ) {
-        console.warn(
-          `Rate limit exceeded for ${clientIP} on ${tier.description}`,
-        );
-        return NextResponse.json(
-          {
-            error: `Rate limit exceeded: ${tier.description}. Please try again later.`,
-            retryAfter: Math.ceil(tier.windowMs / 1000),
-          },
-          {
-            status: 429,
-            headers: {
-              "Retry-After": Math.ceil(tier.windowMs / 1000).toString(),
-              "X-RateLimit-Limit": tier.maxRequests.toString(),
-              "X-RateLimit-Window": tier.windowMs.toString(),
-            },
-          },
-        );
-      }
-    }
-
-    // Validate and sanitize input
     const body = await request.json();
     const validation = validateInput(body);
 
