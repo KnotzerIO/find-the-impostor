@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import ThemeColor from "@/src/components/theme-color";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -46,6 +47,7 @@ export default function RootLayout({
       >
         <ThemeColor />
         <NextIntlClientProvider> {children}</NextIntlClientProvider>
+        <Toaster richColors closeButton />
       </body>
     </html>
   );
