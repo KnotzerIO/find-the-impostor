@@ -27,6 +27,7 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function MobileSetupPhase() {
   const {
@@ -53,9 +54,20 @@ export default function MobileSetupPhase() {
   const locale = useLocale() as Locale;
 
   const handleStartGame = async () => {
-    setIsStarting(true);
-    await startGame(t, locale);
-    setIsStarting(false);
+    try {
+      if (isStarting) return;
+      if (gameState.gameStarted) return;
+      setIsStarting(true);
+      await startGame(t, locale);
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong, please try again.",
+      );
+    } finally {
+      setIsStarting(false);
+    }
   };
 
   const canStartGame =

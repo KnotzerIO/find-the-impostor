@@ -74,11 +74,9 @@ export async function getRandomWordWithHints(
     return fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
   }
 
-  return {
-    word: language === "en" ? "mystery" : "geheimnis",
-    hints:
-      language === "en"
-        ? ["unknown", "hidden", "secret"]
-        : ["unbekannt", "versteckt", "geheim"],
-  };
+  throw new Error(
+    language === "en"
+      ? "Something went wrong, try again"
+      : "Etwas ist schief gelaufen, bitte versuche es erneut",
+  );
 }

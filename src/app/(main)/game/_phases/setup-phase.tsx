@@ -24,6 +24,7 @@ import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function SetupPhase() {
   const {
@@ -72,9 +73,20 @@ export default function SetupPhase() {
   ];
 
   const handleStartGame = async () => {
-    setIsStarting(true);
-    await startGame(t, locale);
-    setIsStarting(false);
+    try {
+      if (isStarting) return;
+      if (gameState.gameStarted) return;
+      setIsStarting(true);
+      await startGame(t, locale);
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong, please try again.",
+      );
+    } finally {
+      setIsStarting(false);
+    }
   };
 
   const handleAddCustomCategory = () => {
