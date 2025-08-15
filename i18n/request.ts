@@ -1,10 +1,9 @@
+import { Locale, SUPPORTED_LANGUAGES } from "@/src/config/language";
 import { getUserLocale } from "@/src/lib/locale";
-import { Locale } from "@/src/types/game";
 import { getRequestConfig } from "next-intl/server";
 import { headers } from "next/headers";
 
-const supportedLocales = ["en", "de"] as const;
-type SupportedLocale = (typeof supportedLocales)[number];
+const supportedLocales = SUPPORTED_LANGUAGES.map(lang => lang.value);
 
 async function getPreferredLocale(): Promise<Locale> {
   try {
@@ -25,8 +24,8 @@ async function getPreferredLocale(): Promise<Locale> {
         .sort((a, b) => b.quality - a.quality);
 
       for (const lang of languages) {
-        if (supportedLocales.includes(lang.code as SupportedLocale)) {
-          return lang.code as SupportedLocale;
+        if (supportedLocales.includes(lang.code as Locale)) {
+          return lang.code as Locale;
         }
       }
     }

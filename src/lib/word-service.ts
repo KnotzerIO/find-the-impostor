@@ -1,6 +1,7 @@
+import { Locale } from "../config/language";
 import { db } from "./storage";
 import { FALLBACK_WORDS_WITH_HINTS } from "@/src/data/fallbackwords";
-import { Difficulty, Locale, WordWithHints } from "@/src/types/game";
+import { Difficulty, WordWithHints } from "@/src/types/game";
 
 export async function getRandomWordWithHints(
   category: string,

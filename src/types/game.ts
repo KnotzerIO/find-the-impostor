@@ -1,4 +1,5 @@
-export type Locale = "en" | "de";
+import { Locale } from "../config/language";
+
 export type Difficulty = "easy" | "medium" | "hard";
 
 export type TranslationFunction = (key: string) => string;

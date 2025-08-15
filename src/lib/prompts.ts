@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// lib/advanced-prompts.ts
-import { Locale } from "@/src/types/game";
+import { Locale } from "../config/language";
 
 export interface PromptConfig {
   category: string;

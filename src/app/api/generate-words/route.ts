@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Locale } from "@/src/config/language";
 import { openAIService } from "@/src/lib/openai-service";
 import { PromptEngine } from "@/src/lib/prompts";
-import { Locale } from "@/src/types/game";
 import { NextRequest, NextResponse } from "next/server";
 
 interface RateLimitTier {

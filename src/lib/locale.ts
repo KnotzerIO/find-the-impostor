@@ -1,6 +1,6 @@
 "use server";
 
-import { Locale } from "../types/game";
+import { Locale } from "../config/language";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "NEXT_LOCALE";

@@ -1,8 +1,8 @@
+import { Locale } from "../config/language";
 import { getRandomWordWithHints } from "@/src/lib/word-service";
 import type {
   Difficulty,
   GameState,
-  Locale,
   Player,
   TranslationFunction,
 } from "@/src/types/game";
