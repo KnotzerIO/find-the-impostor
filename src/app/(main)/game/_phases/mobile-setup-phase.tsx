@@ -13,8 +13,8 @@ import {
   SelectValue,
 } from "@/src/components/ui/select";
 import { Switch } from "@/src/components/ui/switch";
+import { Locale } from "@/src/config/language";
 import { useGameStore } from "@/src/stores/game-store";
-import { Locale } from "@/src/types/game";
 import {
   ArrowLeft,
   ChevronRight,

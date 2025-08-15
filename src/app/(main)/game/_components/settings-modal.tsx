@@ -1,3 +1,4 @@
+import LanguageSelector from "./language-selector";
 import {
   Dialog,
   DialogContent,
@@ -16,18 +17,13 @@ import {
 } from "@/src/components/ui/select";
 import { setUserLocale } from "@/src/lib/locale";
 import { useGameStore } from "@/src/stores/game-store";
-import { Difficulty, Locale } from "@/src/types/game";
+import { Difficulty } from "@/src/types/game";
 import { Settings } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function SettingsModal() {
   const { gameState, setDifficulty } = useGameStore();
   const t = useTranslations("SetupPhase");
-  const locale = useLocale() as Locale;
-  const languages = [
-    { value: "en", label: "English", flag: "🇺🇸" },
-    { value: "de", label: "Deutsch", flag: "🇦🇹" },
-  ];
 
   const difficulties = [
     { value: "easy", label: t("easy") },
@@ -53,28 +49,10 @@ export default function SettingsModal() {
           <Label className="text-lg font-semibold text-white">
             {t("language")}
           </Label>
-          <Select
-            value={locale}
-            onValueChange={value => setUserLocale(value as Locale)}
-          >
-            <SelectTrigger className="h-14 w-full rounded-2xl border-gray-700 bg-gray-800/50 px-3 py-2 text-white">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="rounded-2xl">
-              {languages.map(lang => (
-                <SelectItem
-                  key={lang.value}
-                  value={lang.value}
-                  className="rounded-xl py-3 text-white"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-lg">{lang.flag}</span>
-                    <span>{lang.label}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <LanguageSelector
+            triggerClassName="h-14 rounded-2xl"
+            onLanguageChange={locale => setUserLocale(locale)}
+          />
           <Label className="text-lg font-semibold text-white">
             {t("difficulty")}
           </Label>

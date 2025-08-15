@@ -1,4 +1,5 @@
 import { IconBox } from "../_components/icon-box";
+import LanguageSelector from "../_components/language-selector";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -17,9 +18,10 @@ import {
   SelectValue,
 } from "@/src/components/ui/select";
 import { Separator } from "@/src/components/ui/separator";
+import { Locale } from "@/src/config/language";
 import { setUserLocale } from "@/src/lib/locale";
 import { useGameStore } from "@/src/stores/game-store";
-import { Difficulty, Locale } from "@/src/types/game";
+import { Difficulty } from "@/src/types/game";
 import { ArrowLeft, Plus, Settings, Tag, User, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -59,11 +61,6 @@ export default function SetupPhase() {
   const allCategories = [
     ...["animals", "food", "objects", "movies", "places", "professions"],
     ...customCategories,
-  ];
-
-  const languages = [
-    { value: "en", label: "English", flag: "🇺🇸" },
-    { value: "de", label: "Deutsch", flag: "🇦🇹" },
   ];
 
   const difficulties = [
@@ -156,7 +153,7 @@ export default function SetupPhase() {
                     value={playerNames[i] || ""}
                     onChange={e => setPlayerName(i, e.target.value)}
                     onFocus={e => e.target.select()}
-                    className="border-zinc-700 bg-zinc-800/50 text-white transition-colors placeholder:text-zinc-500 focus:border-blue-400"
+                    className="text-white transition-colors placeholder:text-zinc-500 focus:border-blue-400"
                   />
                 ))}
               </div>
@@ -182,19 +179,15 @@ export default function SetupPhase() {
                   value={gameState.impostorCount.toString()}
                   onValueChange={value => setImpostorCount(Number(value))}
                 >
-                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
+                  <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="border-zinc-700 bg-zinc-900">
+                  <SelectContent>
                     {Array.from(
                       { length: gameState.totalPlayers - 1 },
                       (_, i) => i + 1,
                     ).map(num => (
-                      <SelectItem
-                        key={num}
-                        value={num.toString()}
-                        className="text-white focus:bg-zinc-800"
-                      >
+                      <SelectItem key={num} value={num.toString()}>
                         {num} Impostor{num > 1 ? "s" : ""}
                       </SelectItem>
                     ))}
@@ -206,27 +199,7 @@ export default function SetupPhase() {
                 <Label className="flex items-center text-sm font-medium text-zinc-300">
                   🌐 {t("language")}
                 </Label>
-                <Select
-                  value={locale}
-                  onValueChange={value => setUserLocale(value as Locale)}
-                >
-                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="border-zinc-700 bg-zinc-900">
-                    {languages.map(lang => (
-                      <SelectItem
-                        key={lang.value}
-                        value={lang.value}
-                        className="text-white focus:bg-zinc-800"
-                      >
-                        <span className="flex items-center gap-2">
-                          {lang.flag} {lang.label}
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <LanguageSelector onLanguageChange={setUserLocale} />
               </div>
 
               <div className="space-y-3">
@@ -237,19 +210,16 @@ export default function SetupPhase() {
                   value={gameState.difficulty}
                   onValueChange={value => setDifficulty(value as Difficulty)}
                 >
-                  <SelectTrigger className="w-full border-zinc-700 bg-zinc-800/50 text-white">
+                  <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="border-zinc-700 bg-zinc-900">
+                  <SelectContent>
                     {difficulties.map(difficulty => (
                       <SelectItem
                         key={difficulty.value}
                         value={difficulty.value}
-                        className="text-white focus:bg-zinc-800"
                       >
-                        <span className="flex items-center gap-2">
-                          {difficulty.label}
-                        </span>
+                        {difficulty.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
