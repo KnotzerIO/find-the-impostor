@@ -67,5 +67,8 @@
     "theWordWas": "The Word Was",
     "newGame": "New Game",
     "category": "Category"
+  },
+  "Error": {
+    "somethingWentWrong": "Something went wrong, please try again."
   }
 }

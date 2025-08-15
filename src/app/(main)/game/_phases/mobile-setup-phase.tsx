@@ -50,6 +50,7 @@ export default function MobileSetupPhase() {
   >("main");
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
+  const tError = useTranslations("Error");
   const router = useRouter();
   const locale = useLocale() as Locale;
 
@@ -60,11 +61,8 @@ export default function MobileSetupPhase() {
       setIsStarting(true);
       await startGame(t, locale);
     } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong, please try again.",
-      );
+      console.error(error);
+      toast.error(tError("somethingWentWrong"));
     } finally {
       setIsStarting(false);
     }

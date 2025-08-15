@@ -47,6 +47,7 @@ export default function SetupPhase() {
 
   const [isStarting, setIsStarting] = useState(false);
   const t = useTranslations("SetupPhase");
+  const tError = useTranslations("Error");
   const router = useRouter();
   const locale = useLocale() as Locale;
   const categoryTranslations = {
@@ -76,11 +77,8 @@ export default function SetupPhase() {
       setIsStarting(true);
       await startGame(t, locale);
     } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong, please try again.",
-      );
+      console.error(error);
+      toast.error(tError("somethingWentWrong"));
     } finally {
       setIsStarting(false);
     }

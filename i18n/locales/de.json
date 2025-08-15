@@ -67,5 +67,8 @@
     "theWordWas": "Das Wort war",
     "newGame": "Neues Spiel",
     "category": "Kategorie"
+  },
+  "Error": {
+    "somethingWentWrong": "Etwas ist schief gelaufen, bitte versuche es erneut."
   }
 }

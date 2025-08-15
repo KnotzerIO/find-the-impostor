@@ -76,8 +76,6 @@ export async function getRandomWordWithHints(
   }
 
   throw new Error(
-    language === "en"
-      ? "Something went wrong, try again"
-      : "Etwas ist schief gelaufen, bitte versuche es erneut",
+    `No words available for category "${category}" in language "${language}"`,
   );
 }
