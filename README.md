@@ -20,6 +20,11 @@
 
 ---
 
+> [!NOTE]
+> The AI demo is currently running on a personal budget, which has now been used up, so you might notice some errors or fallback words.
+> If you enjoy the project and feel generous, you can [buy me a coffee](https://buymeacoffee.com/knotzer) or [sponsor me on GitHub](https://github.com/sponsors/knotzerio).  
+
+
 ## 🎮 How to Play
 
 ### 📋 **Game Setup**
